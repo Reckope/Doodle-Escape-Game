@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	public ProjectilePool ProjectilePool;
 	// Components
 	private Rigidbody2D rb2d;
+	private Animator anim;
 
 	// GameObjects
 	[Header("Game Objects")]
@@ -15,9 +16,9 @@ public class Player : MonoBehaviour {
 	public Transform groundCheck;
 
 	// Global Variables
+	public bool movingLeft, movingRight, shootingLeft, shootingRight, shooting;
 	[SerializeField]
 	private float jumpForce, acceleration, maxSpeed, groundCheckRadius;
-	public bool movingLeft, movingRight, shootingLeft, shootingRight, shooting;
 	private float nextFire, fireRate;
 
 
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour {
 		bool grounded;
 		float moveHorizontal;
 
+		// I like to move it move it.
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, whatIsGround);
 		moveHorizontal = Input.GetAxisRaw("Horizontal");
 		Vector2 movement = new Vector2 (moveHorizontal, 0);
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour {
 			movingRight = false;
 		}
 
+		// Jump up, jump up and get down. Jump around.
 		jump = Input.GetKeyDown (KeyCode.W);
 		if(jump){
 			if(grounded){
@@ -98,7 +101,7 @@ public class Player : MonoBehaviour {
 			shooting = false;
 		}
 	}
-
+	// Spawn the bullets
 	private void SpawnProjectile(){
 		float spawnProjectileLeft = (this.gameObject.transform.position.x - 2f);
 		float spawnProjectileRight = (this.gameObject.transform.position.x + 2f);

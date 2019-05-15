@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour {
 	public Player Player;
 
 	// GameObjects
-	public GameObject player;
+	GameObject player;
 
 	// Global Variables
 	private float direction;
@@ -17,17 +17,17 @@ public class Projectile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//player = GameObject.FindWithTag ("Player");
-		speed = 17f;
+		player = GameObject.FindWithTag ("Player");
+		speed = 25f;
 	}
 	
 	// Update is called once per frame
 	private void Update () {
 		// Move the projectile left or right.
-		if(Player.shootingLeft && gameObject.transform.position.x <= player.transform.position.x){
+		if(gameObject.transform.position.x <= player.transform.position.x){
 			direction = -1;
 		}
-		if (Player.shootingRight && gameObject.transform.position.x >= player.transform.position.x){
+		if (gameObject.transform.position.x >= player.transform.position.x){
 			direction = 1;
 		}
 		moveXPosition = direction * speed * Time.deltaTime * 1;
