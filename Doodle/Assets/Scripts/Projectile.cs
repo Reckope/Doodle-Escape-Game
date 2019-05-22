@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-	// Scripts
-	public Player Player;
-
 	// GameObjects
 	GameObject player;
+	GameObject ground;
 
 	// Global Variables
 	private float direction;
@@ -18,7 +16,8 @@ public class Projectile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindWithTag ("Player");
-		speed = 25f;
+		ground = GameObject.FindWithTag ("Ground");
+		speed = 15f;
 	}
 	
 	// Update is called once per frame
@@ -33,14 +32,15 @@ public class Projectile : MonoBehaviour {
 		moveXPosition = direction * speed * Time.deltaTime * 1;
 		transform.Translate(moveXPosition, 0, 0);
 		// If the projectile goes out of bounds, disable it.
-		if(transform.position.x < -25 || transform.position.x > 25){
+		if(transform.position.x < -45 || transform.position.x > 45){
 			gameObject.SetActive(false);
 		}
 	}
 
 	// If the projectile hits either an enemy, wall or the ground...
 	private void OnTriggerEnter2D(Collider2D Collider2D){
-		if (Collider2D.gameObject.layer == LayerMask.NameToLayer ("enemy") || Collider2D.gameObject.layer == LayerMask.NameToLayer ("ground")){
+		Debug.Log("HIT");
+		if (Collider2D.gameObject.layer == LayerMask.NameToLayer ("Enemy") || Collider2D.gameObject.layer == LayerMask.NameToLayer ("Ground")){
 			gameObject.SetActive(false);
 		}
 	}

@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
 
 	void Awake () {
 		// Target frame rate is 60 fps
-		QualitySettings.vSyncCount = 0;
+		QualitySettings.vSyncCount = 1;
 		Application.targetFrameRate = 600;
 		// Singleton Pattern: There can only ever be one instance of a GameController.
 		if (instance == null){

@@ -45,8 +45,14 @@ public class Player : MonoBehaviour {
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, whatIsGround);
 		moveHorizontal = Input.GetAxisRaw("Horizontal");
 		Vector2 movement = new Vector2 (moveHorizontal, 0);
-		if((rb2d.velocity.x > -maxSpeed && rb2d.velocity.x < maxSpeed && grounded)){
+		if((rb2d.velocity.x >= -maxSpeed && rb2d.velocity.x <= maxSpeed && grounded)){
 			rb2d.AddForce(movement * acceleration);
+		}
+		else if(!grounded){
+			rb2d.AddForce(movement * (acceleration / 3f));
+			if(rb2d.velocity.x < -maxSpeed || rb2d.velocity.x > maxSpeed){
+				rb2d.AddForce(-movement * acceleration);
+			}
 		}
 
 		if(moveHorizontal < 0){
@@ -103,8 +109,8 @@ public class Player : MonoBehaviour {
 	}
 	// Spawn the bullets
 	private void SpawnProjectile(){
-		float spawnProjectileLeft = (this.gameObject.transform.position.x - 2f);
-		float spawnProjectileRight = (this.gameObject.transform.position.x + 2f);
+		float spawnProjectileLeft = (this.gameObject.transform.position.x - 1f);
+		float spawnProjectileRight = (this.gameObject.transform.position.x + 1f);
 
 		GameObject projectile = ProjectilePool.GetPooledProjectile();
 		if (projectile != null){
