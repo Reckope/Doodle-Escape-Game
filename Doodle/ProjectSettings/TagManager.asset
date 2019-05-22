@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Projectile
   - Ground
+  - Key_Red
+  - Key_Yellow
+  - Key_Blue
+  - Key_Green
   layers:
   - Default
   - TransparentFX

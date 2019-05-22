@@ -39,7 +39,6 @@ public class Projectile : MonoBehaviour {
 
 	// If the projectile hits either an enemy, wall or the ground...
 	private void OnTriggerEnter2D(Collider2D Collider2D){
-		Debug.Log("HIT");
 		if (Collider2D.gameObject.layer == LayerMask.NameToLayer ("Enemy") || Collider2D.gameObject.layer == LayerMask.NameToLayer ("Ground")){
 			gameObject.SetActive(false);
 		}

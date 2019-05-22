@@ -6,6 +6,7 @@ public class Player : MonoBehaviour {
 
 	// Scripts
 	public ProjectilePool ProjectilePool;
+	
 	// Components
 	private Rigidbody2D rb2d;
 	private Animator anim;
@@ -107,6 +108,7 @@ public class Player : MonoBehaviour {
 			shooting = false;
 		}
 	}
+
 	// Spawn the bullets
 	private void SpawnProjectile(){
 		float spawnProjectileLeft = (this.gameObject.transform.position.x - 1f);
@@ -121,6 +123,13 @@ public class Player : MonoBehaviour {
 				projectile.transform.position = new Vector2(spawnProjectileRight, this.gameObject.transform.position.y);
 			}
 			projectile.SetActive(true);
+		}
+	}
+
+	// When the player collides with something
+	private void OnCollisionEnter2D(Collision2D Col){
+		if(Col.gameObject.layer == LayerMask.NameToLayer ("Lava")){
+			Debug.Log("GAME OVER");
 		}
 	}
 }
