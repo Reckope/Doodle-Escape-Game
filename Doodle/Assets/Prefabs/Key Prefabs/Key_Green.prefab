@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4066040552310606}
   - component: {fileID: 212471365808641136}
   - component: {fileID: 60810210165365164}
+  - component: {fileID: 114377612219507314}
   m_Layer: 0
   m_Name: Key_Green
   m_TagString: Key_Green
@@ -106,6 +107,17 @@ PolygonCollider2D:
       - {x: 0.68, y: 0.26}
       - {x: 0.55, y: 0.19}
       - {x: 0.44, y: 0.19}
+--- !u!114 &114377612219507314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1110229987934982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28b02bd8ee1494689a4456809c7d9128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212471365808641136
 SpriteRenderer:
   m_ObjectHideFlags: 1

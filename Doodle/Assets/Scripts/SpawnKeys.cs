@@ -9,11 +9,7 @@ public class SpawnKeys : MonoBehaviour {
 	private Vector2[] keyLocation = new Vector2[4];
 	private GameObject key;
 
-	// Global Variables
-	public int numberOfKeys;
-
 	void Start () {
-		numberOfKeys = 0;
 		InstantiateKeys();
 	}
 
@@ -26,7 +22,7 @@ public class SpawnKeys : MonoBehaviour {
 
 		for(int x = 0; x < keys.Length; x++){
 			key = (GameObject)Instantiate (keys[x], keyLocation[x], Quaternion.identity);
-			numberOfKeys++;
+			GameController.instance.numberOfKeys++;
 		}
 	}
 }

@@ -51,17 +51,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\EditorPath.cs" />
-     <Compile Include="Assets\MoveOnPath.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\EditorPath.cs" />
      <Compile Include="Assets\Scripts\Game Control\ChooseScene.cs" />
      <Compile Include="Assets\Scripts\Game Control\GameController.cs" />
+     <Compile Include="Assets\Scripts\Key.cs" />
+     <Compile Include="Assets\Scripts\MoveOnPath.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Scripts\Player\PlayersFace.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\ProjectilePool.cs" />
+     <Compile Include="Assets\Scripts\SpawnKeys.cs" />
      <Compile Include="Assets\Scripts\SpikeBall.cs" />
-     <Compile Include="Assets\SpawnKeys.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

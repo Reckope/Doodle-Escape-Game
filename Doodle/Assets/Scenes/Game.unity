@@ -3253,6 +3253,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e135ea0b5464834948bf46cdccda94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redKeyEmpty: {fileID: 1107080731}
+  yellowKeyEmpty: {fileID: 1408346809}
+  greenKeyEmpty: {fileID: 1319168297}
+  blueKeyEmpty: {fileID: 629225125}
+  redKey: {fileID: 21300000, guid: 34d575d69bdd64eb4b8641eb864543fd, type: 3}
+  yellowKey: {fileID: 21300000, guid: 10892971570104934ad4eb09d95babe2, type: 3}
+  blueKey: {fileID: 21300000, guid: d0dfce0c09aa2448abd8fbc760a4eb98, type: 3}
+  greenKey: {fileID: 21300000, guid: 5ff0d707c2f704427b49f989830db6d6, type: 3}
 --- !u!4 &1517633815
 Transform:
   m_ObjectHideFlags: 0
