@@ -10,6 +10,7 @@ TagManager:
   - Key_Yellow
   - Key_Blue
   - Key_Green
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Ground
   - Projectile
   - Lava
-  - 
+  - Enemy
   - 
   - 
   - 

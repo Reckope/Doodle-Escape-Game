@@ -5,14 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	// Scripts
-	public ProjectilePool ProjectilePool;
+	ProjectilePool ProjectilePool;
 	
 	// Components
 	private Rigidbody2D rb2d;
-	private Animator anim;
+	Collider2D Collider2D;
 
 	// GameObjects
-	[Header("Game Objects")]
 	public LayerMask whatIsGround;
 	public Transform groundCheck;
 
@@ -25,15 +24,19 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Collider2D = GetComponent<Collider2D>();
 		rb2d = GetComponent<Rigidbody2D>();
+		ProjectilePool = GetComponent<ProjectilePool>();
 		nextFire = 0.0f;
 		fireRate = 0.15f;
+		Collider2D.enabled = true;
+		rb2d.constraints = RigidbodyConstraints2D.None;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		MovePlayer();
-		ShootGuns();
+		Shoot();
 	}
 
 	// Key controls to move the player
@@ -42,7 +45,7 @@ public class Player : MonoBehaviour {
 		bool grounded;
 		float moveHorizontal;
 
-		// I like to move it move it.
+		// Move the main character.
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, whatIsGround);
 		moveHorizontal = Input.GetAxisRaw("Horizontal");
 		Vector2 movement = new Vector2 (moveHorizontal, 0);
@@ -57,19 +60,18 @@ public class Player : MonoBehaviour {
 		}
 
 		if(moveHorizontal < 0){
+			NotMoving();
 			movingLeft = true;
-			movingRight = false;
 		}
 		else if(moveHorizontal > 0){
-			movingLeft = false;
+			NotMoving();
 			movingRight = true;
 		}
 		else{
-			movingLeft = false;
-			movingRight = false;
+			NotMoving();
 		}
 
-		// Jump up, jump up and get down. Jump around.
+		// Jump up, jump up and get down.
 		jump = Input.GetKeyDown (KeyCode.W);
 		if(jump){
 			if(grounded){
@@ -79,40 +81,49 @@ public class Player : MonoBehaviour {
 		//Debug.Log("velocity: " + rb2d.velocity.x);
 	}
 
+	private void NotMoving(){
+		movingLeft = false;
+		movingRight = false;
+	}
+
 	// Kill those enemies!
-	private void ShootGuns(){
+	private void Shoot(){
 		float shoot;
 
 		shoot = Input.GetAxisRaw("Shoot");
-		if(shoot < 0){
-			shootingRight = false;
-			shootingLeft = true;
-			shooting = true;
-			if(Time.time > nextFire){
+		if(Time.time > nextFire){
+			if(shoot < 0){
+				NotShooting();
+				shootingLeft = true;
+				shooting = true;
+			}
+			else if(shoot > 0){
+				NotShooting();
+				shootingRight = true;
+				shooting = true;
+			}
+			else{
+				NotShooting();
+			}
+
+			if(shooting){
 				nextFire = Time.time + fireRate;
 				SpawnProjectile();
 			}
 		}
-		else if(shoot > 0){
-			shootingLeft = false;
-			shootingRight = true;
-			shooting = true;
-			if(Time.time > nextFire){
-				nextFire = Time.time + fireRate;
-				SpawnProjectile();
-			}
-		}
-		else{
-			shootingRight = false;
-			shootingLeft = false;
-			shooting = false;
-		}
+	}
+
+	private void NotShooting(){
+		shootingRight = false;
+		shootingLeft = false;
+		shooting = false;
 	}
 
 	// Spawn the bullets
 	private void SpawnProjectile(){
-		float spawnProjectileLeft = (this.gameObject.transform.position.x - 1f);
-		float spawnProjectileRight = (this.gameObject.transform.position.x + 1f);
+		const int SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER = 1;
+		float spawnProjectileLeft = (this.gameObject.transform.position.x - SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER);
+		float spawnProjectileRight = (this.gameObject.transform.position.x + SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER);
 
 		GameObject projectile = ProjectilePool.GetPooledProjectile();
 		if (projectile != null){
@@ -126,10 +137,43 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	private void PlayerDie(string causeOfDeath){
+		// anim.SetTrigger(causeOfDeath);
+		// sound.Play(causeOfDeath);
+		Collider2D.enabled = false;
+		rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
+		rb2d.velocity = (new Vector2 (0, 11f));
+	}
+
+	// ***** Triggers and Collisions *****
+
 	// When the player collides with something
 	private void OnCollisionEnter2D(Collision2D Col){
-		if(Col.gameObject.layer == LayerMask.NameToLayer ("Lava")){
-			Debug.Log("GAME OVER");
+		string causeOfDeath = null;
+
+		// Select cause of death once the enemy
+		if(Col.gameObject.tag == ("Enemy")){
+			if(Col.gameObject.layer == LayerMask.NameToLayer("Lava")){
+				causeOfDeath = "DEATH_BY_LAVA";
+			}
+			else if(Col.gameObject.layer == LayerMask.NameToLayer ("Bullet")){
+				causeOfDeath = "DEATH_BY_BULLET";
+			}
+			else if(Col.gameObject.layer == LayerMask.NameToLayer ("SpikeBall")){
+				causeOfDeath = "DEATH_BY_SPIKEBALL";
+			}
+			else if(Col.gameObject.layer == LayerMask.NameToLayer ("Guard")){
+				causeOfDeath = "DEATH_BY_GUARD";
+			}
+			else if(Col.gameObject.layer == LayerMask.NameToLayer ("ShadowDog")){
+				causeOfDeath = "DEATH_BY_SHADOWDOG";
+			}
+			else{
+				causeOfDeath = "DEATH_BY_ENVIRONMENT";
+			}
+			PlayerDie(causeOfDeath);
+			GameController.instance.GameOver(causeOfDeath);
+			Debug.Log("Cause of Death: " + causeOfDeath);
 		}
 	}
 }

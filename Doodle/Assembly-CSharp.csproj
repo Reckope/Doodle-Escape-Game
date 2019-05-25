@@ -61,7 +61,6 @@
      <Compile Include="Assets\Scripts\Player\PlayersFace.cs" />
      <Compile Include="Assets\Scripts\Projectile.cs" />
      <Compile Include="Assets\Scripts\ProjectilePool.cs" />
-     <Compile Include="Assets\Scripts\SpawnKeys.cs" />
      <Compile Include="Assets\Scripts\SpikeBall.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

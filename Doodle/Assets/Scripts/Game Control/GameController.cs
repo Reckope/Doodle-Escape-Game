@@ -8,23 +8,26 @@ public class GameController : MonoBehaviour {
 	public static GameController instance;
 
 	// GameObjects & components
+	public GameObject[] keys = new GameObject[4];
+	public Transform[] spawnPoints = new Transform[4];
+	private GameObject key;
 	GameObject Door;
 
 	// Global Variables
-	public int numberOfKeys;
+	public int numberOfKeysRemaining;
 
 	void Awake () {
 		Door = GameObject.Find("Door");
-		GameSettings();
-		numberOfKeys = 0;
 		if(Door == null){
 			Door.SetActive(true);
 		}
+		GameSettings();
+		SpawnKeys();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(numberOfKeys == 0){
+		if(numberOfKeysRemaining == 0){
 			UnlockDoor();
 		}
 	}
@@ -43,37 +46,33 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	// When the player collects a key
-	public void CollectedKey(string keyColour){
-		GameObject key = GameObject.FindGameObjectWithTag(keyColour);
-		GameObject keyEmpty;
-		switch(keyColour){
-			case "Key_Red":
-				keyEmpty = GameObject.Find("Key_Red_Empty");
-				key.transform.position = new Vector2(keyEmpty.transform.position.x, keyEmpty.transform.position.y);
-			break;
-			case "Key_Yellow":
-				keyEmpty = GameObject.Find("Key_Yellow_Empty");
-				key.transform.position = new Vector2(keyEmpty.transform.position.x, keyEmpty.transform.position.y);
-			break;
-			case "Key_Blue":
-				keyEmpty = GameObject.Find("Key_Blue_Empty");
-				key.transform.position = new Vector2(keyEmpty.transform.position.x, keyEmpty.transform.position.y);
-			break;
-			case "Key_Green":
-				keyEmpty = GameObject.Find("Key_Green_Empty");
-				key.transform.position = new Vector2(keyEmpty.transform.position.x, keyEmpty.transform.position.y);
-			break;
-			default:
-				Debug.Log("no colour!");
-			break;
+	private void SpawnKeys(){
+		numberOfKeysRemaining = 0;
+		for(int x = 0; x < keys.Length; x++){
+			key = (GameObject)Instantiate (keys[x], spawnPoints[x].position, Quaternion.identity);
+			numberOfKeysRemaining++;
 		}
 	}
 
-	// Unlock the Door and escape!
-	private void UnlockDoor(){
+	// When the player collects a key
+	public void CollectedKey(string keyColour){
+		numberOfKeysRemaining--;
+		GameObject key = GameObject.FindGameObjectWithTag(keyColour);
+		GameObject keyLock = GameObject.Find(keyColour + "_Lock");
+		key.transform.position = new Vector2(keyLock.transform.position.x, keyLock.transform.position.y);
+	}
+
+	public void UnlockDoor(){
 		if(Door != null){
 			Door.SetActive(false);
 		}
+	}
+
+	// Game Over
+	public bool GameOver(string causeOfDeath){
+		// UI
+		// Freeze everything
+		// sad music
+		return true;
 	}
 }
