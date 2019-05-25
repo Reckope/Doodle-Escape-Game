@@ -7,13 +7,17 @@ public class GameController : MonoBehaviour {
 	//Static instance of GameController which allows it to be accessed by any other script.
 	public static GameController instance;
 
+	// Scripts
+	Levels LevelsScript;
+
 	// GameObjects & components
-	public GameObject[] keys = new GameObject[4];
-	public Transform[] spawnPoints = new Transform[4];
-	private GameObject key;
+    public GameObject[] keys = new GameObject[4];
+    public Transform[] spawnPoints = new Transform[4];
+    private GameObject key;
 	GameObject Door;
 
 	// Global Variables
+	const int FINISHED_LEVEL_VALUE = -1;
 	public int numberOfKeysRemaining;
 
 	void Awake () {
@@ -21,7 +25,9 @@ public class GameController : MonoBehaviour {
 		if(Door == null){
 			Door.SetActive(true);
 		}
+		LevelsScript = GameObject.FindObjectOfType(typeof(Levels)) as Levels;
 		GameSettings();
+		numberOfKeysRemaining = 0;
 		SpawnKeys();
 	}
 	
@@ -47,12 +53,11 @@ public class GameController : MonoBehaviour {
 	}
 
 	private void SpawnKeys(){
-		numberOfKeysRemaining = 0;
-		for(int x = 0; x < keys.Length; x++){
-			key = (GameObject)Instantiate (keys[x], spawnPoints[x].position, Quaternion.identity);
-			numberOfKeysRemaining++;
-		}
-	}
+        for(int x = 0; x < keys.Length; x++){
+            key = (GameObject)Instantiate (keys[x], spawnPoints[x].position, Quaternion.identity);
+            GameController.instance.numberOfKeysRemaining++;
+        }
+    }
 
 	// When the player collects a key
 	public void CollectedKey(string keyColour){
@@ -60,6 +65,8 @@ public class GameController : MonoBehaviour {
 		GameObject key = GameObject.FindGameObjectWithTag(keyColour);
 		GameObject keyLock = GameObject.Find(keyColour + "_Lock");
 		key.transform.position = new Vector2(keyLock.transform.position.x, keyLock.transform.position.y);
+		LevelsScript.DisableLevelBlockers();
+		LevelsScript.ActivateLevel(FINISHED_LEVEL_VALUE);
 	}
 
 	public void UnlockDoor(){
@@ -73,6 +80,10 @@ public class GameController : MonoBehaviour {
 		// UI
 		// Freeze everything
 		// sad music
+		return true;
+	}
+
+	public bool CompletedLevel(int level){
 		return true;
 	}
 }

@@ -39,6 +39,7 @@ public class Player : MonoBehaviour {
 		Shoot();
 	}
 
+	// --------- Player Input ---------
 	// Key controls to move the player
 	private void MovePlayer(){
 		bool jump;
@@ -136,6 +137,12 @@ public class Player : MonoBehaviour {
 			projectile.SetActive(true);
 		}
 	}
+	// ---------- End of Input ----------
+
+	// If i'm on a moving platform, adjust my position so I stay on it. 
+	public void PlayerMoveWithPlatform(GameObject platformName, Vector3 offset){
+		transform.position = platformName.transform.position + offset;
+	}
 
 	private void PlayerDie(string causeOfDeath){
 		// anim.SetTrigger(causeOfDeath);
@@ -151,7 +158,7 @@ public class Player : MonoBehaviour {
 	private void OnCollisionEnter2D(Collision2D Col){
 		string causeOfDeath = null;
 
-		// Select cause of death once the enemy
+		// Select cause of death once the enemy hits me.
 		if(Col.gameObject.tag == ("Enemy")){
 			if(Col.gameObject.layer == LayerMask.NameToLayer("Lava")){
 				causeOfDeath = "DEATH_BY_LAVA";
