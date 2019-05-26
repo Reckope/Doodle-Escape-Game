@@ -22,9 +22,7 @@ public class LevelTrigger : MonoBehaviour{
         if (Col.gameObject.tag == ("Player")) {
             _levelActivated = this.gameObject.tag;
             int.TryParse(_levelActivated, out levelActivated);
-            if(levelActivated != 0){
-                this.gameObject.SetActive(false);
-            }
+            this.gameObject.SetActive(false);
             LevelsScript.ActivateLevel(levelActivated);
             LevelsScript.ActivateLevelBlocker(levelActivated);
         }

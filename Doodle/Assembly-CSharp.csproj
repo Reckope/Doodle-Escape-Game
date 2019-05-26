@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\EditorPath.cs" />
      <Compile Include="Assets\Scripts\Game Control\ChooseScene.cs" />
      <Compile Include="Assets\Scripts\Game Control\GameController.cs" />
+     <Compile Include="Assets\Scripts\Game Control\UIController.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
      <Compile Include="Assets\Scripts\Levels.cs" />
      <Compile Include="Assets\Scripts\LevelTrigger.cs" />

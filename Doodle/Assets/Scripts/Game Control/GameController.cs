@@ -8,7 +8,8 @@ public class GameController : MonoBehaviour {
 	public static GameController instance;
 
 	// Scripts
-	Levels LevelsScript;
+	Levels Levels;
+	UIController UIController;
 
 	// GameObjects & components
     public GameObject[] keys = new GameObject[4];
@@ -19,13 +20,18 @@ public class GameController : MonoBehaviour {
 	// Global Variables
 	const int FINISHED_LEVEL_VALUE = -1;
 	public int numberOfKeysRemaining;
+	public string keyNeeded;
+	public string objective;
 
 	void Awake () {
 		Door = GameObject.Find("Door");
 		if(Door == null){
 			Door.SetActive(true);
 		}
-		LevelsScript = GameObject.FindObjectOfType(typeof(Levels)) as Levels;
+		Levels = GameObject.FindObjectOfType(typeof(Levels)) as Levels;
+		UIController = GameObject.FindObjectOfType(typeof(UIController)) as UIController;
+		keyNeeded = null;
+		objective = null;
 		GameSettings();
 		numberOfKeysRemaining = 0;
 		SpawnKeys();
@@ -33,9 +39,7 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(numberOfKeysRemaining == 0){
-			UnlockDoor();
-		}
+		Debug.Log("Key Needed: " + keyNeeded);
 	}
 
 	// Instance / target framerate.
@@ -65,8 +69,9 @@ public class GameController : MonoBehaviour {
 		GameObject key = GameObject.FindGameObjectWithTag(keyColour);
 		GameObject keyLock = GameObject.Find(keyColour + "_Lock");
 		key.transform.position = new Vector2(keyLock.transform.position.x, keyLock.transform.position.y);
-		LevelsScript.DisableLevelBlockers();
-		LevelsScript.ActivateLevel(FINISHED_LEVEL_VALUE);
+		Debug.Log("reaming: " + numberOfKeysRemaining);
+		Levels.DisableLevelBlockers();
+		Levels.CompletedLevel(Levels.currentLevel, keyColour);
 	}
 
 	public void UnlockDoor(){
@@ -83,7 +88,12 @@ public class GameController : MonoBehaviour {
 		return true;
 	}
 
-	public bool CompletedLevel(int level){
-		return true;
+	public void SetObjectiveText(){
+		if(objective != null){
+			UIController.DisplayObjectiveText(objective);
+		}
+		else{
+			UIController.HideObjectiveText();
+		}
 	}
 }
