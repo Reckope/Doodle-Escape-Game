@@ -9,54 +9,46 @@ using UnityEngine;
 
 public class Levels : MonoBehaviour{
 
+    List<StoreLevels> startLevels = new List<StoreLevels>();
+
     // Gameobjects
     public GameObject[] levelBlockers = new GameObject[5];
     GameObject startPoint;
 
     // Global Variables
     public int currentLevel;
+    private string objective;
+    private string keyNeeded;
 
     // Start is called before the first frame update
     void Start(){
         startPoint = GameObject.Find("Level0Trigger");
         currentLevel = 0;
+        StoreLevelsInList();
         DisableLevelBlockers();
     }
 
-    // Update is called once per frame
-    void Update(){
-        //Debug.Log("Current: " + currentLevel);
+    delegate void StoreLevels();
+
+    // Store in order!
+    void StoreLevelsInList(){
+        startLevels.Add(NotOnLevel); // 0
+        startLevels.Add(LevelOne); // 1...
+        startLevels.Add(LevelTwo);
+        startLevels.Add(LevelThree);
+        startLevels.Add(LevelFour);
     }
 
-    public void ActivateLevel(int level){
-        currentLevel = level;
-        //Debug.Log("ACTIVATED: " + currentLevel);
+    public void ActivateLevel(int levelID){
+        currentLevel = levelID;
         if(GameController.instance.numberOfKeysRemaining >= 1){
-            switch(currentLevel){
-                case 4:
-                LevelFour();
-                break;
-                case 3:
-                LevelThree();
-                break;
-                case 2:
-                LevelTwo();
-                break;
-                case 1:
-                LevelOne();
-                break;
-                case 0:
-                NotOnLevel();
-                break;
-                default:
-                Debug.Log("ERROR: Couldn't find level number.");
-                break;
-            }
+            startLevels[levelID]();
+            Debug.Log("STARTED: " + levelID);
         }
         else{
             Escape();
         }
-        GameController.instance.SetObjectiveText();
+        GameController.instance.SetObjectiveText(objective);
     }
 
     public void DisableLevelBlockers(){
@@ -75,48 +67,51 @@ public class Levels : MonoBehaviour{
     }
 
     // Don't really need to check if the right key collected matches the level, but
-    // could do something like this in the future for bigger projects. 
+    // could do something like this in the future for bigger projects with level specific objects. 
     public void CompletedLevel(int level, string keyAcquired){
-        if(GameController.instance.keyNeeded == keyAcquired){
+        if(keyNeeded == keyAcquired){
             Debug.Log("Completed Level: " + level);
-            GameController.instance.objective = "Return to the start position";
-            GameController.instance.keyNeeded = null;
+            objective = "Return to the start position";
+            keyNeeded = null;
         }
         else{
-            Debug.Log("KEYS DID NOT MATCH");
-            // reset key
+            //Debug.Log("KEYS DID NOT MATCH");
         }
-        GameController.instance.SetObjectiveText();
+        GameController.instance.SetObjectiveText(objective);
         startPoint.SetActive(true);
     }
 
+    // -------------------- Levels --------------------
+
     public void NotOnLevel(){
-        GameController.instance.objective = "Choose a path";
+        objective = "Choose a path";
     }
 
     public void LevelOne(){
-        GameController.instance.keyNeeded = "Key_Red";
-        GameController.instance.objective = "Obtain the Red Key";
+        keyNeeded = "Key_Red";
+        objective = "Obtain the Red Key";
+        GameController.instance.SetHelpText("This is a test This is a test This is a test");
     }
 
     public void LevelTwo(){
-        GameController.instance.keyNeeded = "Key_Yellow";
-        GameController.instance.objective = "Obtain the Yellow Key";
+        keyNeeded = "Key_Yellow";
+        objective = "Obtain the Yellow Key";
+        GameController.instance.SetHelpText("This is a test This is a test This is a test");
     }
 
     public void LevelThree(){
-        GameController.instance.keyNeeded = "Key_Blue";
-        GameController.instance.objective = "Obtain the Blue Key";
+        keyNeeded = "Key_Blue";
+        objective = "Obtain the Blue Key";
     }
 
     public void LevelFour(){
-        GameController.instance.keyNeeded = "Key_Green";
-        GameController.instance.objective = "Obtain the Green Key";
+        keyNeeded = "Key_Green";
+        objective = "Obtain the Green Key";
     }
 
     public void Escape(){
         GameController.instance.UnlockDoor();
-        GameController.instance.objective = "Escape";
+        objective = "Escape";
     }
 
 }

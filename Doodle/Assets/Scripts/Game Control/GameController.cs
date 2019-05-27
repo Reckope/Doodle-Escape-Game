@@ -20,8 +20,7 @@ public class GameController : MonoBehaviour {
 	// Global Variables
 	const int FINISHED_LEVEL_VALUE = -1;
 	public int numberOfKeysRemaining;
-	public string keyNeeded;
-	public string objective;
+	//public string objective;
 
 	void Awake () {
 		Door = GameObject.Find("Door");
@@ -30,8 +29,6 @@ public class GameController : MonoBehaviour {
 		}
 		Levels = GameObject.FindObjectOfType(typeof(Levels)) as Levels;
 		UIController = GameObject.FindObjectOfType(typeof(UIController)) as UIController;
-		keyNeeded = null;
-		objective = null;
 		GameSettings();
 		numberOfKeysRemaining = 0;
 		SpawnKeys();
@@ -39,7 +36,7 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log("Key Needed: " + keyNeeded);
+		
 	}
 
 	// Instance / target framerate.
@@ -69,7 +66,6 @@ public class GameController : MonoBehaviour {
 		GameObject key = GameObject.FindGameObjectWithTag(keyColour);
 		GameObject keyLock = GameObject.Find(keyColour + "_Lock");
 		key.transform.position = new Vector2(keyLock.transform.position.x, keyLock.transform.position.y);
-		Debug.Log("reaming: " + numberOfKeysRemaining);
 		Levels.DisableLevelBlockers();
 		Levels.CompletedLevel(Levels.currentLevel, keyColour);
 	}
@@ -88,12 +84,18 @@ public class GameController : MonoBehaviour {
 		return true;
 	}
 
-	public void SetObjectiveText(){
+	public void SetObjectiveText(string objective){
 		if(objective != null){
 			UIController.DisplayObjectiveText(objective);
 		}
 		else{
 			UIController.HideObjectiveText();
+		}
+	}
+
+	public void SetHelpText(string helpText){
+		if(helpText != null){
+			UIController.DisplayHelpText(helpText);
 		}
 	}
 }

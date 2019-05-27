@@ -152,10 +152,10 @@ RectTransform:
   m_Father: {fileID: 2042228905}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -100}
-  m_SizeDelta: {x: 500, y: 159}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210208831
 MonoBehaviour:
@@ -190,8 +190,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is where the help text goes. Some stuff here is helpful. jhgjhg jhg
-    jhg jhg jhg jhg jhg jhg jhg jhg.
+  m_Text: 'This is where the help text goes. Some stuff here is helpful. '
 --- !u!222 &210208832
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -568,7 +567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &401640317
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4450,8 +4449,6 @@ MonoBehaviour:
   - {fileID: 1502214241}
   - {fileID: 1768104606}
   numberOfKeysRemaining: 0
-  keyNeeded: 
-  objective: 
 --- !u!4 &1517633815
 Transform:
   m_ObjectHideFlags: 0
@@ -14289,10 +14286,10 @@ RectTransform:
   m_Father: {fileID: 401640317}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -100}
-  m_SizeDelta: {x: 600, y: 200}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2042228906
 CanvasGroup:
@@ -14341,9 +14338,9 @@ MonoBehaviour:
   m_Padding:
     m_Left: 50
     m_Right: 50
-    m_Top: 10
+    m_Top: 25
     m_Bottom: 10
-  m_ChildAlignment: 4
+  m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
