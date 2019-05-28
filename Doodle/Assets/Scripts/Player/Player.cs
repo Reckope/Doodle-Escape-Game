@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
 	public Transform groundCheck;
 
 	// Global Variables
+	public static bool playerIsIdle;
 	public bool movingLeft, movingRight, shootingLeft, shootingRight, shooting;
 	[SerializeField]
 	private float jumpForce, acceleration, maxSpeed, groundCheckRadius;
@@ -63,10 +64,12 @@ public class Player : MonoBehaviour {
 		if(moveHorizontal < 0){
 			NotMoving();
 			movingLeft = true;
+			playerIsIdle = false;
 		}
 		else if(moveHorizontal > 0){
 			NotMoving();
 			movingRight = true;
+			playerIsIdle = false;
 		}
 		else{
 			NotMoving();
@@ -85,6 +88,7 @@ public class Player : MonoBehaviour {
 	private void NotMoving(){
 		movingLeft = false;
 		movingRight = false;
+		playerIsIdle = true;
 	}
 
 	// Kill those enemies!

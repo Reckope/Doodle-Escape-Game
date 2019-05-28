@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\LevelsTest.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\EditorPath.cs" />
      <Compile Include="Assets\Scripts\Game Control\ChooseScene.cs" />

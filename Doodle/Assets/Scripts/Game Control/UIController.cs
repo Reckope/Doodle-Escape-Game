@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour{
 
     const float FADE_SPEED = 1.2f;
     const float HELP_TEXT_DISPLAY_TIME = 5f;
-    const float OBJECTIVE_TEXT_DISPLAY_TIME = 15f;
+    const float OBJECTIVE_TEXT_DISPLAY_TIME = 20f;
     public GameObject objectiveTextHolder;
     public GameObject helpTextHolder;
     public Text helpText;
@@ -56,6 +56,7 @@ public class UIController : MonoBehaviour{
     public void HideObjectiveText(){
         fadeIn = false;
         fadeOut = true;
+        objectiveTextIsActive = false;
     }
 
     public void FadeObjectiveText(){

@@ -120,6 +120,76 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &19729895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 19729898}
+  - component: {fileID: 19729897}
+  - component: {fileID: 19729899}
+  m_Layer: 0
+  m_Name: LevelFive
+  m_TagString: 5
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &19729897
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19729895}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 3.23}
+  m_EdgeRadius: 0
+--- !u!4 &19729898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19729895}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12.59, y: 2.38, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &19729899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19729895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5cfd098aea9b4d2aad2fdaa26725a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &210208829
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,10 +222,10 @@ RectTransform:
   m_Father: {fileID: 2042228905}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -64.5}
+  m_SizeDelta: {x: 500, y: 79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210208831
 MonoBehaviour:
@@ -567,7 +637,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &401640317
 RectTransform:
   m_ObjectHideFlags: 0
@@ -585,8 +655,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 316.6, y: -115}
-  m_SizeDelta: {x: 600, y: 200}
+  m_AnchoredPosition: {x: 316.59998, y: -221}
+  m_SizeDelta: {x: 600, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &401640318
 CanvasGroup:
@@ -617,7 +687,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 4
+  m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
@@ -637,7 +707,7 @@ GameObject:
   - component: {fileID: 453822765}
   - component: {fileID: 453822764}
   m_Layer: 0
-  m_Name: Level4Trigger
+  m_Name: LevelFour
   m_TagString: 4
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1883,7 +1953,7 @@ GameObject:
   - component: {fileID: 577361743}
   - component: {fileID: 577361742}
   m_Layer: 0
-  m_Name: Level0Trigger
+  m_Name: NotOnLevel
   m_TagString: 0
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1953,7 +2023,7 @@ GameObject:
   - component: {fileID: 588387379}
   - component: {fileID: 588387378}
   m_Layer: 0
-  m_Name: Level3Trigger
+  m_Name: LevelThree
   m_TagString: 3
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2057,7 +2127,7 @@ GameObject:
   - component: {fileID: 629225126}
   - component: {fileID: 629225127}
   m_Layer: 0
-  m_Name: Key_Blue_Lock
+  m_Name: Blue_Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3111,7 +3181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858518881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.068, y: -0.068, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.07635102, y: 0.07635102, z: 0}
   m_Children:
   - {fileID: 1709078324}
@@ -3250,7 +3320,7 @@ GameObject:
   - component: {fileID: 896995613}
   - component: {fileID: 896995612}
   m_Layer: 0
-  m_Name: Level2Trigger
+  m_Name: LevelTwo
   m_TagString: 2
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3500,7 +3570,7 @@ GameObject:
   - component: {fileID: 1107080732}
   - component: {fileID: 1107080733}
   m_Layer: 0
-  m_Name: Key_Red_Lock
+  m_Name: Red_Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4161,7 +4231,7 @@ GameObject:
   - component: {fileID: 1319168298}
   - component: {fileID: 1319168299}
   m_Layer: 0
-  m_Name: Key_Green_Lock
+  m_Name: Green_Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4240,7 +4310,7 @@ GameObject:
   - component: {fileID: 1408346810}
   - component: {fileID: 1408346811}
   m_Layer: 0
-  m_Name: Key_Yellow_Lock
+  m_Name: Yellow_Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4320,7 +4390,7 @@ GameObject:
   - component: {fileID: 1491535750}
   - component: {fileID: 1491535751}
   m_Layer: 0
-  m_Name: Level1Trigger
+  m_Name: LevelOne
   m_TagString: 1
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4419,6 +4489,7 @@ GameObject:
   - component: {fileID: 1517633815}
   - component: {fileID: 1517633814}
   - component: {fileID: 1517633816}
+  - component: {fileID: 1517633817}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -4482,6 +4553,18 @@ MonoBehaviour:
   - {fileID: 1947617239}
   - {fileID: 1113191527}
   currentLevel: 0
+--- !u!114 &1517633817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517633813}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5cfd098aea9b4d2aad2fdaa26725a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1538113261
 GameObject:
   m_ObjectHideFlags: 0
@@ -14286,10 +14369,10 @@ RectTransform:
   m_Father: {fileID: 401640317}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -100}
+  m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2042228906
 CanvasGroup:
