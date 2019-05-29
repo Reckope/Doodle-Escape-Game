@@ -55,7 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\LevelsTest.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\EditorPath.cs" />
      <Compile Include="Assets\Scripts\Game Control\ChooseScene.cs" />
@@ -63,6 +62,7 @@
      <Compile Include="Assets\Scripts\Game Control\UIController.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
      <Compile Include="Assets\Scripts\Levels.cs" />
+     <Compile Include="Assets\Scripts\LevelsStructure.cs" />
      <Compile Include="Assets\Scripts\LevelTrigger.cs" />
      <Compile Include="Assets\Scripts\MovingPlatform.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />

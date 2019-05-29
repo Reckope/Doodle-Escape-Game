@@ -62,16 +62,23 @@ public class GameController : MonoBehaviour {
 
 	// When the player collects a key
 	public void CollectedKey(string keyColour){
-		string keyPlural;
-		string keyVerb;
-
 		numberOfKeysRemaining--;
+		WarpKeyToLock(keyColour);
+		//Levels.DisableLevelBlockers();
+		Levels.CompletedLevel(Levels.currentLevel);
+	}
+
+	private void WarpKeyToLock(string keyColour){
 		GameObject key = GameObject.FindGameObjectWithTag(keyColour);
 		GameObject keyLock = GameObject.Find(keyColour + "_Lock");
 		key.transform.position = new Vector2(keyLock.transform.position.x, keyLock.transform.position.y);
-		Levels.DisableLevelBlockers();
-		Levels.CompletedLevel(Levels.currentLevel, keyColour);
-		if(numberOfKeysRemaining == 1){
+	}
+
+	public void CompleteLevelHelpText(){
+		string keyPlural;
+		string keyVerb;
+
+		if(GameController.instance.numberOfKeysRemaining == 1){
 			keyPlural = "Key";
 			keyVerb = "is";
 		}
@@ -79,7 +86,7 @@ public class GameController : MonoBehaviour {
 			keyPlural = "Keys";
 			keyVerb = "are";
 		}
-		GameController.instance.SetHelpText("You've obtained a key! There " + keyVerb + " now " + numberOfKeysRemaining + " " + keyPlural + " remaining.");
+		SetHelpText("You've obtained a key! There " + keyVerb + " now " + numberOfKeysRemaining + " " + keyPlural + " remaining.");
 	}
 
 	public void UnlockDoor(){

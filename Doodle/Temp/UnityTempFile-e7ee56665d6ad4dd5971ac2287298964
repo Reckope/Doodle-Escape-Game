@@ -193,8 +193,6 @@
 -define:ENABLE_UNITY_COLLECTIONS_CHECKS
 -define:ENABLE_BURST_AOT
 -define:UNITY_TEAM_LICENSE
-"Assets/LevelsFactory.cs"
-"Assets/LevelsTest.cs"
 "Assets/Scripts/CameraController.cs"
 "Assets/Scripts/EditorPath.cs"
 "Assets/Scripts/Game Control/ChooseScene.cs"
@@ -202,6 +200,7 @@
 "Assets/Scripts/Game Control/UIController.cs"
 "Assets/Scripts/Key.cs"
 "Assets/Scripts/Levels.cs"
+"Assets/Scripts/LevelsStructure.cs"
 "Assets/Scripts/LevelTrigger.cs"
 "Assets/Scripts/MovingPlatform.cs"
 "Assets/Scripts/Player/Player.cs"
