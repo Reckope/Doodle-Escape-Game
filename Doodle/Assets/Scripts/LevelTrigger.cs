@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class LevelTrigger : MonoBehaviour{
 
-    Levels LevelsScript;
+    LevelManager LevelManager;
 
     private int levelActivated;
 
     // Start is called before the first frame update
     void Start(){
-        LevelsScript = GameObject.FindObjectOfType(typeof(Levels)) as Levels;
+        LevelManager = GameObject.FindObjectOfType(typeof(LevelManager)) as LevelManager;
         //levelActivated = 0;
     }
 
@@ -23,7 +23,7 @@ public class LevelTrigger : MonoBehaviour{
             _levelActivated = this.gameObject.tag;
             int.TryParse(_levelActivated, out levelActivated);
             this.gameObject.SetActive(false);
-            LevelsScript.ActivateLevel(levelActivated);
+            LevelManager.ActivateLevel(levelActivated);
             //LevelsScript.ActivateLevelBlocker(levelActivated);
         }
     }

@@ -61,8 +61,8 @@
      <Compile Include="Assets\Scripts\Game Control\GameController.cs" />
      <Compile Include="Assets\Scripts\Game Control\UIController.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
+     <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\Levels.cs" />
-     <Compile Include="Assets\Scripts\LevelsStructure.cs" />
      <Compile Include="Assets\Scripts\LevelTrigger.cs" />
      <Compile Include="Assets\Scripts\MovingPlatform.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />

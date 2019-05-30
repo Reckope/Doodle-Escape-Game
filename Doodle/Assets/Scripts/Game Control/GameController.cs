@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
 	public static GameController instance;
 
 	// Scripts
-	Levels Levels;
+	LevelManager LevelManager;
 	UIController UIController;
 
 	// GameObjects & components
@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
 		if(Door == null){
 			Door.SetActive(true);
 		}
-		Levels = GameObject.FindObjectOfType(typeof(Levels)) as Levels;
+		LevelManager = GameObject.FindObjectOfType(typeof(LevelManager)) as LevelManager;
 		UIController = GameObject.FindObjectOfType(typeof(UIController)) as UIController;
 		GameSettings();
 		numberOfKeysRemaining = 0;
@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour {
 		numberOfKeysRemaining--;
 		WarpKeyToLock(keyColour);
 		//Levels.DisableLevelBlockers();
-		Levels.CompletedLevel(Levels.currentLevel);
+		LevelManager.CompletedLevel(LevelManager.currentLevel);
 	}
 
 	private void WarpKeyToLock(string keyColour){

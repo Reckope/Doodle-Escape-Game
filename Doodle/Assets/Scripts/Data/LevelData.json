@@ -1,0 +1,53 @@
+{
+    "Level": [
+        {
+            "id": "CompletedLevel",
+            "name": "Completed",
+            "objective": "Return to the Start Point",
+            "buildIndex": -1,
+            "isActive": true
+        },
+        {
+            "id": "NotOnLevel",
+            "name": "I Thought this was the Bar?",
+            "objective": "Choose a path",
+            "buildIndex": 0,
+            "isActive": true
+        },
+        {
+            "id": "LevelOne",
+            "name": "Prison Walls are Never Built to Scale.",
+            "objective": "Obtain the Red key",
+            "buildIndex": 1,
+            "isActive": true
+        },
+        {
+            "id": "LevelTwo",
+            "name": "As Light as a Dark Cell.",
+            "objective": "Obtain the Yellow key",
+            "buildIndex": 2,
+            "isActive": true
+        },
+        {
+            "id": "LevelThree",
+            "name": "I Would Lava to Break Free.",
+            "objective": "Obtain the Blue key",
+            "buildIndex": 3,
+            "isActive": true
+        },
+        {
+            "id": "LevelFour",
+            "name": "Becoming a Cellebrity.",
+            "objective": "Obtain the Green key",
+            "buildIndex": 4,
+            "isActive": true
+        },
+        {
+            "id": "LevelFive",
+            "name": "Freedom",
+            "objective": "Escape",
+            "buildIndex": 5,
+            "isActive": true
+        }
+    ]
+}

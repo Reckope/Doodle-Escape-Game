@@ -130,14 +130,13 @@ GameObject:
   m_Component:
   - component: {fileID: 19729898}
   - component: {fileID: 19729897}
-  - component: {fileID: 19729899}
   m_Layer: 0
-  m_Name: LevelFive
+  m_Name: LevelTest
   m_TagString: 5
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &19729897
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178,18 +177,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &19729899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19729895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5cfd098aea9b4d2aad2fdaa26725a56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &210208829
 GameObject:
   m_ObjectHideFlags: 0
@@ -4546,13 +4533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e439863f853442ab1672f1b694dc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelBlockers:
-  - {fileID: 1005107157}
-  - {fileID: 2085747205}
-  - {fileID: 725156905}
-  - {fileID: 1947617239}
-  - {fileID: 1113191527}
-  currentLevel: 0
 --- !u!114 &1517633817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4560,11 +4540,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517633813}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5cfd098aea9b4d2aad2fdaa26725a56, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c6f1e495e2094057bc4e1901071517c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelBlockers:
+  - {fileID: 1005107157}
+  - {fileID: 2085747205}
+  - {fileID: 725156905}
+  - {fileID: 1947617239}
+  - {fileID: 1113191527}
 --- !u!1 &1538113261
 GameObject:
   m_ObjectHideFlags: 0
