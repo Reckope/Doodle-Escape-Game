@@ -211,8 +211,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -64.5}
-  m_SizeDelta: {x: 500, y: 79}
+  m_AnchoredPosition: {x: 300, y: -104.5}
+  m_SizeDelta: {x: 500, y: 159}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &210208831
 MonoBehaviour:
@@ -247,7 +247,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This is where the help text goes. Some stuff here is helpful. '
+  m_Text: 'This is where the help text goes. Some stuff here is helpful. This is where
+    the help text goes. Some stuff here is helpful. '
 --- !u!222 &210208832
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14357,8 +14358,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -100}
-  m_SizeDelta: {x: 600, y: 200}
+  m_AnchoredPosition: {x: 300, y: -104.5}
+  m_SizeDelta: {x: 600, y: 209}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &2042228906
 CanvasGroup:
@@ -14408,7 +14409,7 @@ MonoBehaviour:
     m_Left: 50
     m_Right: 50
     m_Top: 25
-    m_Bottom: 10
+    m_Bottom: 25
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 0

@@ -9,40 +9,40 @@ using UnityEngine;
 public class Levels : MonoBehaviour{
 
     LevelManager LevelManager;
-    Level level = new Level();
 
     void Start(){
         LevelManager = GameObject.FindObjectOfType(typeof(LevelManager)) as LevelManager;
     }
 
-    public void LaunchLevel(string levelID){
-        Invoke(levelID, 0f);
-        //level.DebugValues();
+    // We get the level details from LevelManager.cs, and do whatever we want with the data.
+    // Including launching the levels function via the ID. Could always launch different Scenes for larger projects.
+    public void LaunchLevel(string id, string name, string objective, int buildIndex, bool isActive){
+
+        LevelManager.currentObjective = objective;
+        GameController.instance.SetHelpText("Level launched: " + name);
+        isActive = true;
+        Invoke(id, 0f);
     }
 
-    // -------------------- Levels --------------------
+    // -------------------- Levels, launched via the levels ID. --------------------
 
     public void LevelOne(){
-        GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        //GameController.instance.SetHelpText("This is a test This is a test This is a test");
     }
 
     public void LevelTwo(){
-        GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        //GameController.instance.SetHelpText("This is a test This is a test This is a test");
     }
 
     public void LevelThree(){
-        GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        //GameController.instance.SetHelpText("This is a test This is a test This is a test");
     }
 
     public void LevelFour(){
-        GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        //GameController.instance.SetHelpText("This is a test This is a test This is a test");
     }
 
-    public void Escape(){
-        int levelID = 5;
-
+    public void LevelFive(){
         GameController.instance.UnlockDoor();
-        level.SetLevel(LevelManager.levels[levelID].id, LevelManager.levels[levelID].name, LevelManager.levels[levelID].objective, LevelManager.levels[levelID].buildIndex, true);
-        LevelManager.objective = LevelManager.levels[levelID].objective;
     }
 }

@@ -9,8 +9,8 @@ public class UIController : MonoBehaviour{
 
     public GameObject[] UI;
 
-    const float FADE_SPEED = 1.2f;
-    const float HELP_TEXT_DISPLAY_TIME = 5f;
+    const float FADE_SPEED = 1.1f;
+    const float HELP_TEXT_DISPLAY_TIME = 8f;
     const float OBJECTIVE_TEXT_DISPLAY_TIME = 20f;
     public GameObject objectiveTextHolder;
     public GameObject helpTextHolder;
@@ -43,6 +43,19 @@ public class UIController : MonoBehaviour{
         objectiveTextIsActive = true;
     }
 
+    public void HideObjectiveText(){
+        fadeIn = false;
+        fadeOut = true;
+        objectiveTextIsActive = false;
+    }
+
+    public void DisplayHelpText(string help){
+        helpText.text = help;
+        helpTextHolder.SetActive(true);
+        helpTextIsActive = true;
+        helpTextTimer = 0;
+    }
+
     private void ObjectiveTextDisplayTime(){
         if(objectiveTextIsActive && objectiveTextTimer <= OBJECTIVE_TEXT_DISPLAY_TIME){
             objectiveTextTimer += Time.deltaTime;
@@ -53,13 +66,7 @@ public class UIController : MonoBehaviour{
         }
     }
 
-    public void HideObjectiveText(){
-        fadeIn = false;
-        fadeOut = true;
-        objectiveTextIsActive = false;
-    }
-
-    public void FadeObjectiveText(){
+    private void FadeObjectiveText(){
         objectiveTextHolder.GetComponent<CanvasGroup>().alpha = textOpacity;
         if(fadeIn && textOpacity < 1){
             textOpacity += Time.deltaTime * FADE_SPEED;
@@ -67,13 +74,6 @@ public class UIController : MonoBehaviour{
         if(fadeOut && textOpacity > -1){
             textOpacity -= Time.deltaTime * FADE_SPEED;
         }
-    }
-
-    public void DisplayHelpText(string help){
-        helpText.text = help;
-        helpTextHolder.SetActive(true);
-        helpTextIsActive = true;
-        helpTextTimer = 0;
     }
 
     private void HelpTextDisplayTime(){

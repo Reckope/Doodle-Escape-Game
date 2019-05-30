@@ -12,7 +12,7 @@ public class LevelTrigger : MonoBehaviour{
     // Start is called before the first frame update
     void Start(){
         LevelManager = GameObject.FindObjectOfType(typeof(LevelManager)) as LevelManager;
-        //levelActivated = 0;
+        this.gameObject.SetActive(true);
     }
 
     // Need to detect which level the players enters.
@@ -24,7 +24,6 @@ public class LevelTrigger : MonoBehaviour{
             int.TryParse(_levelActivated, out levelActivated);
             this.gameObject.SetActive(false);
             LevelManager.ActivateLevel(levelActivated);
-            //LevelsScript.ActivateLevelBlocker(levelActivated);
         }
     }
 }
