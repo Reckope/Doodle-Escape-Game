@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape.
+ * Code QA Sweep: DONE - 31/05/19
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,37 +19,53 @@ public class PlayersFace : MonoBehaviour {
 	// Components
 	private Animator anim;
 
+	// Global Variables
 	Quaternion rotation;
 	private string AnimTask;
 
-	// Use this for initialization
+	// ---------------------------------------------------------------------------------
 	void Start () {
-		rotation = transform.rotation;
 		anim = GetComponent<Animator>();
+		rotation = transform.rotation;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		transform.rotation = rotation;
-		if(player.movingLeft && !player.shooting){
-			anim.SetTrigger("LookLeft");
-			AnimTask = "Looking Left";
-		}
-		else if(player.movingRight && !player.shooting){
-			anim.SetTrigger("Idle");
-			AnimTask = "Idle";
-		}
-		else if(player.shootingLeft){
+		MovingShootingAnims();
+	}
+
+	// Use a two-dimentional switch combined with enum values to determine
+	// which animations to play. 
+	private void MovingShootingAnims(){
+		switch(player.shooting){
+			case Player.PlayerShootDir.notShooting:
+				switch(player.moving){
+					case Player.PlayerMoveDir.left:
+					anim.SetTrigger("LookLeft");
+					AnimTask = "Looking Left";
+					break;
+					case Player.PlayerMoveDir.right:
+					anim.SetTrigger("Idle");
+					AnimTask = "Idle";
+					break;
+					case Player.PlayerMoveDir.idle:
+					anim.SetTrigger("Idle");
+					AnimTask = "Idle";
+					break;
+				}
+			break;
+			case Player.PlayerShootDir.left:
 			anim.SetTrigger("ShootLeft");
 			AnimTask = "Shooting Left";
-		}
-		else if(player.shootingRight){
+			break;
+			case Player.PlayerShootDir.right:
 			anim.SetTrigger("ShootRight");
 			AnimTask = "Shooting Right";
-		}
-		else{
+			break;
+			default:
 			anim.SetTrigger("Idle");
 			AnimTask = "Not playing any anims";
+			break;
 		}
 		//Debug.Log(AnimTask);
 	}

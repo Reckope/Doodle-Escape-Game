@@ -10,17 +10,17 @@ public class Levels : MonoBehaviour{
 
     LevelManager LevelManager;
 
+    // ---------------------------------------------------------------------------------
     void Start(){
         LevelManager = GameObject.FindObjectOfType(typeof(LevelManager)) as LevelManager;
     }
 
     // We get the level details from LevelManager.cs, and do whatever we want with the data.
-    // Including launching the levels function via the ID. Could always launch different Scenes for larger projects.
+    // Including launching the levels function via the ID.
     public void LaunchLevel(string id, string name, string objective, int buildIndex, bool isActive){
-
+        LevelManager.currentLevel = buildIndex;
         LevelManager.currentObjective = objective;
         GameController.instance.SetHelpText("Level launched: " + name);
-        isActive = true;
         Invoke(id, 0f);
     }
 

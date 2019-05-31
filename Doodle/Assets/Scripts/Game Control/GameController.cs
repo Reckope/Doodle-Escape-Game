@@ -86,7 +86,7 @@ public class GameController : MonoBehaviour {
 			keyPlural = "Keys";
 			keyVerb = "are";
 		}
-		helptext = "You've obtained a key! There " + keyVerb + " now " + numberOfKeysRemaining + " " + keyPlural + " remaining. Return to the start position and track down the remaining " + keyPlural;
+		helptext = "You've obtained a key! There " + keyVerb + " now " + numberOfKeysRemaining + " " + keyPlural + " remaining. Return to the start position and track down the remaining " + keyPlural + ".";
 		if(numberOfKeysRemaining == 0){
 			helptext = "All the keys have been collected! The door is now unlocked.";
 		}

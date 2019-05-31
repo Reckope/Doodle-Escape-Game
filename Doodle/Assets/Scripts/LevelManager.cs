@@ -1,6 +1,7 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape.
  * References: [1]
+ * Code QA Sweep: DONE - 31/05/19
  * Notes:
  * If I really needed to get level data from a .txt file, I could use 'TextAsset levelText'.
  */
@@ -19,6 +20,9 @@ public struct Level{
     public string objective;
     public int buildIndex;
     public bool isActive;
+    public bool completed;
+
+    // Do I need a constructor for this??
 }
 
 // Data collection for the level. 
@@ -28,19 +32,22 @@ public class LevelDataCollection {
 }
 
 public class LevelManager : MonoBehaviour{
+    // Other classes
     Levels Levels;
     UIController UIController;
+    LevelDataCollection allLevels;
 
     // Gameobjects
     public GameObject[] levelBlockers = new GameObject[5];
     GameObject startPoint;
 
     // Global Variables
+    const int NOT_ON_LEVEL_BUILD_INDEX = 0;
     const int FINAL_LEVEL_BUILD_INDEX = 5;
     const string LEVEL_DATA_JSON_PATH = "/Scripts/Data/LevelData.json";
     public static int currentLevel;
     public static string currentObjective;
-    private string applicationDataPath;
+    private string applicationDataPath, jsonData;
 
     // ---------------------------------------------------------------------------------
     void Start(){
@@ -49,11 +56,17 @@ public class LevelManager : MonoBehaviour{
         startPoint = GameObject.Find("NotOnLevel");
         applicationDataPath = Application.dataPath;
         DisableLevelBlockers();
+        jsonData = File.ReadAllText(Application.dataPath + LEVEL_DATA_JSON_PATH);
+        allLevels = JsonUtility.FromJson<LevelDataCollection>(jsonData);
     }
 
     // Start each level depending on what trigger was activated, and block the player from exiting. 
     public void ActivateLevel(int levelID){
-        currentLevel = levelID;
+        // Disable NotOnLevel once another level has been actived. 
+        if(levelID != NOT_ON_LEVEL_BUILD_INDEX){
+            allLevels.levels[NOT_ON_LEVEL_BUILD_INDEX].isActive = false;
+            Debug.Log("Disbaled Level 0");
+        }
         if(GameController.instance.numberOfKeysRemaining >= 1){
             ActivateLevelBlocker(levelID);
         }
@@ -66,24 +79,22 @@ public class LevelManager : MonoBehaviour{
 
     // Once we know what level has been triggered, we load the data for that level from 
     // the Json file and pass it over to Levels.cs.
-    void LoadLevelDataFromJsonFile(int levelActivated){
+    private void LoadLevelDataFromJsonFile(int levelActivated){
         string id, name, objective;
         int buildIndex;
-        bool isActive;
-
-        string displayData = File.ReadAllText(applicationDataPath + LEVEL_DATA_JSON_PATH);
-        LevelDataCollection allLevels = JsonUtility.FromJson<LevelDataCollection>(displayData);
+        bool isActive = true;
 
         id = allLevels.levels[levelActivated].id;
         name = allLevels.levels[levelActivated].name;
         objective = allLevels.levels[levelActivated].objective;
         buildIndex = allLevels.levels[levelActivated].buildIndex;
-        isActive = allLevels.levels[levelActivated].isActive;
+        allLevels.levels[levelActivated].isActive = isActive;
+        Debug.Log("Level: " + levelActivated + " is active: " + isActive);
         
         Levels.LaunchLevel(id, name, objective, buildIndex, isActive);
     }
 
-    public void ActivateLevelBlocker(int level){
+    private void ActivateLevelBlocker(int level){
         if(levelBlockers[level] != null){
             levelBlockers[level].SetActive(true);
         }
@@ -100,9 +111,17 @@ public class LevelManager : MonoBehaviour{
         UIController.HideObjectiveText();
         GameController.instance.CompleteLevelHelpText();
         startPoint.SetActive(true);
+        UpdateLevelData(levelID);
     }
 
-    public void DisableLevelBlockers(){
+    private void UpdateLevelData(int levelID){
+        allLevels.levels[levelID].isActive = false;
+        allLevels.levels[levelID].completed = true;
+        Debug.Log("Level: " + levelID + " is active: " + allLevels.levels[levelID].isActive);
+        Debug.Log("Level " + levelID + " is completed: " + allLevels.levels[levelID].completed);
+    }
+
+    private void DisableLevelBlockers(){
         for(int i = 0; i < levelBlockers.Length; i++){
             levelBlockers[i].SetActive(false);
         }

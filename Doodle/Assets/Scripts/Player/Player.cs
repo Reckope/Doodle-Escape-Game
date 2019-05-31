@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape.
+ * Code QA Sweep: DONE - 31/05/19
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,14 +21,17 @@ public class Player : MonoBehaviour {
 	public Transform groundCheck;
 
 	// Global Variables
-	public static bool playerIsIdle;
-	public bool movingLeft, movingRight, shootingLeft, shootingRight, shooting;
+	public enum PlayerShootDir {left, notShooting, right};
+	public enum PlayerMoveDir {left, idle, right};
 	[SerializeField]
 	private float jumpForce, acceleration, maxSpeed, groundCheckRadius;
 	private float nextFire, fireRate;
 
+	public PlayerShootDir shooting;
+	public PlayerMoveDir moving;
 
-	// Use this for initialization
+
+	// ---------------------------------------------------------------------------------
 	void Start () {
 		Collider2D = GetComponent<Collider2D>();
 		rb2d = GetComponent<Rigidbody2D>();
@@ -32,6 +40,8 @@ public class Player : MonoBehaviour {
 		fireRate = 0.15f;
 		Collider2D.enabled = true;
 		rb2d.constraints = RigidbodyConstraints2D.None;
+		shooting = PlayerShootDir.notShooting;
+		moving = PlayerMoveDir.idle;
 	}
 	
 	// Update is called once per frame
@@ -62,20 +72,16 @@ public class Player : MonoBehaviour {
 		}
 
 		if(moveHorizontal < 0){
-			NotMoving();
-			movingLeft = true;
-			playerIsIdle = false;
+			moving = PlayerMoveDir.left;
 		}
 		else if(moveHorizontal > 0){
-			NotMoving();
-			movingRight = true;
-			playerIsIdle = false;
+			moving = PlayerMoveDir.right;
 		}
 		else{
-			NotMoving();
+			moving = PlayerMoveDir.idle;
 		}
 
-		// Jump up, jump up and get down.
+		// Jump around.
 		jump = Input.GetKeyDown (KeyCode.W);
 		if(jump){
 			if(grounded){
@@ -85,12 +91,6 @@ public class Player : MonoBehaviour {
 		//Debug.Log("velocity: " + rb2d.velocity.x);
 	}
 
-	private void NotMoving(){
-		movingLeft = false;
-		movingRight = false;
-		playerIsIdle = true;
-	}
-
 	// Kill those enemies!
 	private void Shoot(){
 		float shoot;
@@ -98,30 +98,20 @@ public class Player : MonoBehaviour {
 		shoot = Input.GetAxisRaw("Shoot");
 		if(Time.time > nextFire){
 			if(shoot < 0){
-				NotShooting();
-				shootingLeft = true;
-				shooting = true;
+				shooting = PlayerShootDir.left;
 			}
 			else if(shoot > 0){
-				NotShooting();
-				shootingRight = true;
-				shooting = true;
+				shooting = PlayerShootDir.right;
 			}
 			else{
-				NotShooting();
+				shooting = PlayerShootDir.notShooting;
 			}
 
-			if(shooting){
+			if(shooting == PlayerShootDir.left || shooting == PlayerShootDir.right){
 				nextFire = Time.time + fireRate;
 				SpawnProjectile();
 			}
 		}
-	}
-
-	private void NotShooting(){
-		shootingRight = false;
-		shootingLeft = false;
-		shooting = false;
 	}
 
 	// Spawn the bullets
@@ -132,10 +122,10 @@ public class Player : MonoBehaviour {
 
 		GameObject projectile = ProjectilePool.GetPooledProjectile();
 		if (projectile != null){
-			if(shootingLeft){
+			if(shooting == PlayerShootDir.left){
 				projectile.transform.position = new Vector2(spawnProjectileLeft, this.gameObject.transform.position.y);
 			}
-			else if(shootingRight){
+			else if(shooting == PlayerShootDir.right){
 				projectile.transform.position = new Vector2(spawnProjectileRight, this.gameObject.transform.position.y);
 			}
 			projectile.SetActive(true);

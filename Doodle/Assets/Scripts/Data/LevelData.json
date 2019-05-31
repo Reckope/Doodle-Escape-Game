@@ -5,42 +5,48 @@
             "name": "I Thought this was the Bar?",
             "objective": "Choose a path",
             "buildIndex": 0,
-            "isActive": false
+            "isActive": false,
+            "completed": false
         },
         {
             "id": "LevelOne",
             "name": "Prison Walls are Never Built to Scale.",
             "objective": "Obtain the Red key",
             "buildIndex": 1,
-            "isActive": false
+            "isActive": false,
+            "completed": false
         },
         {
             "id": "LevelTwo",
             "name": "As Light as a Dark Cell.",
             "objective": "Obtain the Yellow key",
             "buildIndex": 2,
-            "isActive": false
+            "isActive": false,
+            "completed": false
         },
         {
             "id": "LevelThree",
             "name": "I Would Lava to Break Free.",
             "objective": "Obtain the Blue key",
             "buildIndex": 3,
-            "isActive": false
+            "isActive": false,
+            "completed": false
         },
         {
             "id": "LevelFour",
             "name": "Becoming a Cellebrity.",
             "objective": "Obtain the Green key",
             "buildIndex": 4,
-            "isActive": false
+            "isActive": false,
+            "completed": false
         },
         {
             "id": "LevelFive",
             "name": "Freedom",
             "objective": "Escape",
             "buildIndex": 5,
-            "isActive": false
+            "isActive": false,
+            "completed": false
         }
     ]
 }
