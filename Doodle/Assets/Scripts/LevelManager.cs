@@ -21,8 +21,6 @@ public struct Level{
     public int buildIndex;
     public bool isActive;
     public bool completed;
-
-    // Do I need a constructor for this??
 }
 
 // Data collection for the level. 

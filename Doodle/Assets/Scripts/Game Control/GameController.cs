@@ -100,8 +100,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	// Game Over
-	public bool GameOver(string causeOfDeath){
-		// UI
+	public bool GameOver(int causeOfDeath){
+		UIController.DisplayGameOverUI(causeOfDeath);
 		// Freeze everything
 		// sad music
 		return true;
@@ -120,5 +120,30 @@ public class GameController : MonoBehaviour {
 		if(helpText != null){
 			UIController.DisplayHelpText(helpText);
 		}
+	}
+
+	public int FindDeathReason(Collision2D Col){
+		int causeOfDeath;
+
+		if(Col.gameObject.layer == LayerMask.NameToLayer("Lava")){
+			causeOfDeath = LayerMask.NameToLayer("Lava");
+		}
+		else if(Col.gameObject.layer == LayerMask.NameToLayer ("Bullet")){
+			causeOfDeath = LayerMask.NameToLayer ("Bullet");
+		}
+		else if(Col.gameObject.layer == LayerMask.NameToLayer ("SpikeBall")){
+			causeOfDeath = LayerMask.NameToLayer ("SpikeBall");
+		}
+		else if(Col.gameObject.layer == LayerMask.NameToLayer ("Guard")){
+			causeOfDeath = LayerMask.NameToLayer ("Guard");
+		}
+		else if(Col.gameObject.layer == LayerMask.NameToLayer ("ShadowDog")){
+			causeOfDeath = LayerMask.NameToLayer ("ShadowDog");
+		}
+		else{
+			causeOfDeath = UIController.DEFAULT_DEATH_REASON;
+		}
+
+		return causeOfDeath;
 	}
 }

@@ -1,0 +1,34 @@
+{
+    "causeOfDeathStrings": [
+        {
+            "id": 9,
+            "name": "Projectile",
+            "deathMessage": "You were shot to death"
+        },
+        {
+            "id": 10,
+            "name": "Lava",
+            "deathMessage": "You fell into lava"
+        },
+        {
+            "id": 11,
+            "name": "SpikeBall",
+            "deathMessage": "You were grinded to death"
+        },
+        {
+            "id": 12,
+            "name": "Guard",
+            "deathMessage": "You were captured by a Guard"
+        },
+        {
+            "id": 13,
+            "name": "Dog",
+            "deathMessage": "You were mauled to death by a dog"
+        },
+        {
+            "id": 14,
+            "name": "Lava",
+            "deathMessage": "You died"
+        }
+    ]
+}

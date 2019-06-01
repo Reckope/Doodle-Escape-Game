@@ -138,7 +138,7 @@ public class Player : MonoBehaviour {
 		transform.position = platformName.transform.position + offset;
 	}
 
-	private void PlayerDie(string causeOfDeath){
+	private void PlayerDie(int causeOfDeath){
 		// anim.SetTrigger(causeOfDeath);
 		// sound.Play(causeOfDeath);
 		Collider2D.enabled = false;
@@ -150,31 +150,14 @@ public class Player : MonoBehaviour {
 
 	// When the player collides with something
 	private void OnCollisionEnter2D(Collision2D Col){
-		string causeOfDeath = null;
+		int causeOfDeath;
 
 		// Select cause of death once the enemy hits me.
 		if(Col.gameObject.tag == ("Enemy")){
-			if(Col.gameObject.layer == LayerMask.NameToLayer("Lava")){
-				causeOfDeath = "DEATH_BY_LAVA";
-			}
-			else if(Col.gameObject.layer == LayerMask.NameToLayer ("Bullet")){
-				causeOfDeath = "DEATH_BY_BULLET";
-			}
-			else if(Col.gameObject.layer == LayerMask.NameToLayer ("SpikeBall")){
-				causeOfDeath = "DEATH_BY_SPIKEBALL";
-			}
-			else if(Col.gameObject.layer == LayerMask.NameToLayer ("Guard")){
-				causeOfDeath = "DEATH_BY_GUARD";
-			}
-			else if(Col.gameObject.layer == LayerMask.NameToLayer ("ShadowDog")){
-				causeOfDeath = "DEATH_BY_SHADOWDOG";
-			}
-			else{
-				causeOfDeath = "DEATH_BY_ENVIRONMENT";
-			}
+			causeOfDeath = GameController.instance.FindDeathReason(Col);
 			PlayerDie(causeOfDeath);
+			//Debug.Log("CAUSE OF DEATH: " + causeOfDeath);
 			GameController.instance.GameOver(causeOfDeath);
-			Debug.Log("Cause of Death: " + causeOfDeath);
 		}
 	}
 }
