@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\Game Control\ChooseScene.cs" />
      <Compile Include="Assets\Scripts\Game Control\GameController.cs" />
      <Compile Include="Assets\Scripts\Game Control\UIController.cs" />
+     <Compile Include="Assets\Scripts\Guard.cs" />
      <Compile Include="Assets\Scripts\Key.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />
      <Compile Include="Assets\Scripts\Levels.cs" />
