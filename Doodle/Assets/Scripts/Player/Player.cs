@@ -21,6 +21,7 @@ public class Player : MonoBehaviour {
 	public Transform groundCheck;
 
 	// Global Variables
+	const int SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER = 1;
 	public enum PlayerShootDir {left, notShooting, right};
 	public enum PlayerMoveDir {left, idle, right};
 	[SerializeField]
@@ -116,7 +117,6 @@ public class Player : MonoBehaviour {
 
 	// Spawn the bullets
 	private void SpawnProjectile(){
-		const int SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER = 1;
 		float spawnProjectileLeft = (this.gameObject.transform.position.x - SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER);
 		float spawnProjectileRight = (this.gameObject.transform.position.x + SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER);
 

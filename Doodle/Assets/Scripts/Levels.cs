@@ -10,6 +10,8 @@ public class Levels : MonoBehaviour{
 
     LevelManager LevelManager;
 
+    public Transform guard;
+
     // ---------------------------------------------------------------------------------
     void Start(){
         LevelManager = GameObject.FindObjectOfType(typeof(LevelManager)) as LevelManager;
@@ -28,6 +30,8 @@ public class Levels : MonoBehaviour{
 
     public void LevelOne(){
         //GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        Instantiate(guard, new Vector3(-24.08f, 2.87f, 0), Quaternion.identity);
+        Instantiate(guard, new Vector3(-12.65f, 5.54f, 0), Quaternion.identity);
     }
 
     public void LevelTwo(){
