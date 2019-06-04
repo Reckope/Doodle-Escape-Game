@@ -513,7 +513,7 @@ GameObject:
   - component: {fileID: 4582057219249725174}
   - component: {fileID: 1859116355779231629}
   m_Layer: 12
-  m_Name: Guard (1)
+  m_Name: Guard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,6 +631,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27101c25dee16434bada8ee5c4bfdf39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  subTask: 0
+  primaryTask: 0
+  enemyLayerMask: 0
+  groundLayerMask: 0
+  health: 100
+  damageTaken: 10
+  spriteAlpha: 0
+  alerted: 0
   guardFace: {fileID: 8211743913796885168}
   tazorLeft: {fileID: 4640491486835804101}
   tazorRight: {fileID: 6917019497704494368}
@@ -639,6 +648,5 @@ MonoBehaviour:
     m_Bits: 256
   leftCheck: {fileID: 1977743156577399190}
   rightCheck: {fileID: 5865221351152878289}
-  Player: {fileID: 0}
+  acceleration: 30
   maxSpeed: 2
-  acceleration: 50

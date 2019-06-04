@@ -10,11 +10,16 @@ public class Levels : MonoBehaviour{
 
     LevelManager LevelManager;
 
+    public GameObject[] guardSpawnPointsLevelOne;
+    public GameObject[] dogSpawnPointsLevelOne;
     public Transform guard;
+    GameObject fieldOfView;
 
     // ---------------------------------------------------------------------------------
     void Start(){
         LevelManager = GameObject.FindObjectOfType(typeof(LevelManager)) as LevelManager;
+        fieldOfView = GameObject.Find("FieldOfView");
+        fieldOfView.SetActive(false);
     }
 
     // We get the level details from LevelManager.cs, and do whatever we want with the data.
@@ -29,13 +34,20 @@ public class Levels : MonoBehaviour{
     // -------------------- Levels, launched via the levels ID. --------------------
 
     public void LevelOne(){
-        //GameController.instance.SetHelpText("This is a test This is a test This is a test");
-        Instantiate(guard, new Vector3(-24.08f, 2.87f, 0), Quaternion.identity);
-        Instantiate(guard, new Vector3(-12.65f, 5.54f, 0), Quaternion.identity);
+        // CREATE ONE FUNCTION FOR THIS, THEN PASS A VAR FOR THE LEVEL
+        for(int i = 0; i < guardSpawnPointsLevelOne.Length; i++){
+            if(guardSpawnPointsLevelOne[i] != null){
+                Instantiate(guard, new Vector3(guardSpawnPointsLevelOne[i].transform.position.x, guardSpawnPointsLevelOne[i].transform.position.y), Quaternion.identity);
+            }
+            else{
+                Debug.Log("Object " + i + " is null");
+            }
+        }
     }
 
     public void LevelTwo(){
         //GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        fieldOfView.SetActive(true);
     }
 
     public void LevelThree(){

@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Guard : MonoBehaviour{
-
-    GuardSubTask subTask;
-    GuardPrimaryTask primaryTask;
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Collider2D))]
+public class Guard : Enemy{
 
     // Components
     Rigidbody2D rb2d;
-    SpriteRenderer mySpriteRenderer;
+    SpriteRenderer spriteFace;
+    SpriteRenderer sprite;
 
     // GameObjects
     public Transform guardFace;
@@ -18,95 +18,118 @@ public class Guard : MonoBehaviour{
     public LayerMask whatIsWall;
     public Transform leftCheck;
     public Transform rightCheck;
-    GameObject Player;
 
     // Global Variables
-    const float GUARD_LOOK_DISTANCE = 8.4f;
-    const int ALERTED_MAX_SPEED = 5;
-    const int GUARD_Y_POSITION = 0;
-    private int enemyLayerMask, groundLayerMask;
+    const float COLLIDE_CHECK_RADIUS = 0.3f;
+    const int ENEMY_Y_POSITION = 0;
+    const int GUARD_FOLLOW_RANGE = 15;
     private int direction;
     [SerializeField]
-    private float acceleration, maxSpeed;
-    private float checkRadius;
-    private bool collidedLeft, collidedRight, alerted;
+    private float acceleration;
+    private bool collidedLeft, collidedRight;
     Quaternion rotation;
-    enum GuardPrimaryTask {patrol, follow, dead, attack};
-    enum GuardSubTask {moveLeft, moveRight};
 
     // ---------------------------------------------------------------------------------
     void Start(){
         rb2d = GetComponent<Rigidbody2D>();
-        mySpriteRenderer = guardFace.GetComponent<SpriteRenderer>();
-        enemyLayerMask = LayerMask.NameToLayer("Enemy");
-        groundLayerMask = LayerMask.NameToLayer("Ground");
-        Player = GameObject.FindGameObjectWithTag("Player");
-        primaryTask = GuardPrimaryTask.patrol;
-        subTask = GuardSubTask.moveLeft;
-        alerted = false;
+        sprite = GetComponent<SpriteRenderer>();
+        spriteFace = guardFace.GetComponent<SpriteRenderer>();
+        primaryTask = EnemyPrimaryTask.patrol;
+        subTask = EnemySubTask.moveLeft;
         rotation = guardFace.transform.rotation;
-        checkRadius = 0.3f;
+        maxSpeed = 2f;
+        health = 100f;
+        base.Start();
     }
 
     // Update is called once per frame
     void Update(){
         guardFace.transform.rotation = rotation;
         SetTasks();
-        DetectPlayer();
-        Debug.Log(primaryTask);
+        //DetectPlayer();
+        if(health > MIN_HEALTH){
+            DetectPlayer();
+            if(Player.IsDead){
+                primaryTask = EnemyPrimaryTask.idle;
+            }
+        }
+        else{
+            primaryTask = EnemyPrimaryTask.dead;
+        }
     }
 
     private void SetTasks(){
         switch(primaryTask){
-            case GuardPrimaryTask.patrol:
+            case EnemyPrimaryTask.patrol:
             Patrol();
             break;
-            case GuardPrimaryTask.follow:
+            case EnemyPrimaryTask.follow:
             Follow();
             break;
-            case GuardPrimaryTask.attack:
+            case EnemyPrimaryTask.attack:
             Attack();
+            MoveGuard();
             break;
-            case GuardPrimaryTask.dead:
+            case EnemyPrimaryTask.dead:
+            Die();
+            break;
+            case EnemyPrimaryTask.idle:
+            // Idle
             break;
         }
 
         switch(subTask){
-            case GuardSubTask.moveLeft:
-            direction = -1;
+            case EnemySubTask.moveLeft:
+            direction = MOVE_LEFT;
             faceLeft();
             break;
-            case GuardSubTask.moveRight:
-            direction = 1;
+            case EnemySubTask.moveRight:
+            direction = MOVE_RIGHT;
             faceRight();
             break;
         }
     }
-    // ----- Tasks -----
+
+    private void MoveGuard(){
+        Vector2 move = new Vector2 (direction, ENEMY_Y_POSITION);
+        if((rb2d.velocity.x >= -maxSpeed && rb2d.velocity.x <= maxSpeed)){
+            rb2d.AddForce(move * acceleration);
+        }
+    }
+
+    private float DistanceBetweenPlayerAndEnemy(){
+        float distance;
+
+        distance = Vector2.Distance(player.transform.position, gameObject.transform.position);
+        return distance;
+    }
+
+    // ---------- Tasks ----------
+
     private void Patrol(){
         MoveGuard();
         // Check if the guard hits a wall.
-        collidedLeft = Physics2D.OverlapCircle (leftCheck.position, checkRadius, whatIsWall);
-        collidedRight = Physics2D.OverlapCircle (rightCheck.position, checkRadius, whatIsWall);
+        collidedLeft = Physics2D.OverlapCircle (leftCheck.position, COLLIDE_CHECK_RADIUS, whatIsWall);
+        collidedRight = Physics2D.OverlapCircle (rightCheck.position, COLLIDE_CHECK_RADIUS, whatIsWall);
         // If the guard hits a wall, change their direction.
         if(collidedLeft){
-            direction = 1;
-            subTask = GuardSubTask.moveRight;
+            direction = MOVE_RIGHT;
+            subTask = EnemySubTask.moveRight;
         }
-        else if(collidedRight){
-            direction = -1;
-            subTask = GuardSubTask.moveLeft;
+        else if(collidedRight && !collidedLeft){
+            direction = MOVE_LEFT;
+            subTask = EnemySubTask.moveLeft;
         }
     }
 
     private void faceRight(){
-        mySpriteRenderer.flipX = false;
+        spriteFace.flipX = false;
         tazorLeft.SetActive(false);
         tazorRight.SetActive(true);
     }
 
     private void faceLeft(){
-        mySpriteRenderer.flipX = true;
+        spriteFace.flipX = true;
         tazorLeft.SetActive(true);
         tazorRight.SetActive(false);
     }
@@ -116,45 +139,51 @@ public class Guard : MonoBehaviour{
     private void DetectPlayer(){
         Vector2 lookDirection;
 
-        if(subTask == GuardSubTask.moveLeft){
+        if(subTask == EnemySubTask.moveLeft){
             lookDirection = Vector2.left;
         }
         else{
             lookDirection = Vector2.right;
         }
-        RaycastHit2D guardVision = Physics2D.Raycast(leftCheck.transform.position, lookDirection, GUARD_LOOK_DISTANCE);
+        RaycastHit2D guardVision = Physics2D.Raycast(leftCheck.transform.position, lookDirection, ENEMY_LOOK_DISTANCE);
 
         if(guardVision.collider != null && guardVision.collider.name == "Player"){
-            primaryTask = GuardPrimaryTask.attack;
+            primaryTask = EnemyPrimaryTask.attack;
         }
-        else if(alerted){
-            primaryTask = GuardPrimaryTask.follow;
+        else if(alerted && DistanceBetweenPlayerAndEnemy() <= GUARD_FOLLOW_RANGE){
+            primaryTask = EnemyPrimaryTask.follow;
+        }
+        else{
+            primaryTask = EnemyPrimaryTask.patrol;
         }
     }
 
     // Follow that prisoner!!
     private void Follow(){
-        if(Player.transform.position.x < transform.position.x){
-            direction = -1;
-            subTask = GuardSubTask.moveLeft;
+        if(player.transform.position.x < transform.position.x){
+            direction = MOVE_LEFT;
+            subTask = EnemySubTask.moveLeft;
         }
-        else if(Player.transform.position.x > transform.position.x){
-            direction = 1;
-            subTask = GuardSubTask.moveRight;
+        else if(player.transform.position.x > transform.position.x){
+            direction = MOVE_RIGHT;
+            subTask = EnemySubTask.moveRight;
         }
         MoveGuard();
     }
 
-    private void Attack(){
-        maxSpeed = ALERTED_MAX_SPEED;
-        alerted = true;
-        MoveGuard();
+    // ---------- Triggers ----------
+
+    private void OnTriggerEnter2D (Collider2D collide){
+        // If the enemy gets hit by a projectile...
+        if(collide.gameObject.layer == LayerMask.NameToLayer("Projectile") && health > MIN_HEALTH){
+            TakeDamage(sprite);
+            //sprite.color = new Color(1f, 1f, 1f, spriteAlpha);
+        }
     }
 
-    private void MoveGuard(){
-        Vector2 move = new Vector2 (direction, GUARD_Y_POSITION);
-        if((rb2d.velocity.x >= -maxSpeed && rb2d.velocity.x <= maxSpeed)){
-            rb2d.AddForce(move * acceleration);
+    private void OnCollisionEnter2D(Collision2D collide){
+        if(collide.gameObject.layer == LayerMask.NameToLayer("Lava")){
+            Die();
         }
     }
 }

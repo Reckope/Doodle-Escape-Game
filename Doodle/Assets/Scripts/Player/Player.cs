@@ -22,6 +22,7 @@ public class Player : MonoBehaviour {
 
 	// Global Variables
 	const int SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER = 1;
+	public static bool IsDead;
 	public enum PlayerShootDir {left, notShooting, right};
 	public enum PlayerMoveDir {left, idle, right};
 	[SerializeField]
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour {
 		ProjectilePool = GetComponent<ProjectilePool>();
 		nextFire = 0.0f;
 		fireRate = 0.15f;
+		IsDead = false;
 		Collider2D.enabled = true;
 		rb2d.constraints = RigidbodyConstraints2D.None;
 		shooting = PlayerShootDir.notShooting;
@@ -144,6 +146,7 @@ public class Player : MonoBehaviour {
 		Collider2D.enabled = false;
 		rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
 		rb2d.velocity = (new Vector2 (0, 11f));
+		IsDead = true;
 	}
 
 	// ***** Triggers and Collisions *****
