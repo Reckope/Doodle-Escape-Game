@@ -138,14 +138,19 @@ public class Guard : Enemy{
     // of him, I attempt to follow / chase him. 
     private void DetectPlayer(){
         Vector2 lookDirection;
+        var raySpawn = transform.position;
+        var left = leftCheck.transform.position;
+        var right = rightCheck.transform.position;
 
         if(subTask == EnemySubTask.moveLeft){
             lookDirection = Vector2.left;
+            raySpawn = left;
         }
         else{
             lookDirection = Vector2.right;
+            raySpawn = right;
         }
-        RaycastHit2D guardVision = Physics2D.Raycast(leftCheck.transform.position, lookDirection, ENEMY_LOOK_DISTANCE);
+        RaycastHit2D guardVision = Physics2D.Raycast(raySpawn, lookDirection, ENEMY_LOOK_DISTANCE);
 
         if(guardVision.collider != null && guardVision.collider.name == "Player"){
             primaryTask = EnemyPrimaryTask.attack;
