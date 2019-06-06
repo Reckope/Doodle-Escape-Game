@@ -11,8 +11,11 @@ public class Levels : MonoBehaviour{
     LevelManager LevelManager;
 
     public GameObject[] guardSpawnPointsLevelOne;
-    public GameObject[] dogSpawnPointsLevelOne;
+    public GameObject[] dogLeftSpawnPointsLevelOne;
+    public GameObject[] dogRightSpawnPointsLevelOne;
     public Transform guard;
+    public Transform dogLeft;
+    public Transform dogRight;
     GameObject fieldOfView;
 
     // ---------------------------------------------------------------------------------
@@ -31,18 +34,55 @@ public class Levels : MonoBehaviour{
         Invoke(id, 0f);
     }
 
+    // This is called from each level, to determine what enemies to spawn.
+    private void SpawnEnemiesInLevel(int level){
+        GameObject[] guardsArray = guardSpawnPointsLevelOne;
+        GameObject[] dogsLeftArray = dogLeftSpawnPointsLevelOne;
+        GameObject[] dogsRightArray = dogRightSpawnPointsLevelOne;
+
+        switch(level){
+            case 5:
+            break;
+            case 4:
+            break;
+            case 3:
+            break;
+            case 2:
+            break;
+            case 1:
+            guardsArray = guardSpawnPointsLevelOne;
+            dogsLeftArray = dogLeftSpawnPointsLevelOne;
+            dogsRightArray = dogRightSpawnPointsLevelOne;
+            break;
+            default:
+            guardsArray = null;
+            break;
+        }
+        SpawnEnemies(guardsArray, dogsLeftArray, dogsRightArray);
+    }
+
+    private void SpawnEnemies(GameObject[] guardsArray, GameObject[] dogsLeftArray, GameObject[] dogsRightArray){
+        for(int i = 0; i < guardsArray.Length; i++){
+            if(guardsArray[i] != null){
+                Instantiate(guard, new Vector3(guardsArray[i].transform.position.x, guardsArray[i].transform.position.y), Quaternion.identity);
+            }
+        }
+        for(int i = 0; i < dogsLeftArray.Length; i++){
+            if(dogsLeftArray[i] != null){
+                Instantiate(dogLeft, new Vector3(dogsLeftArray[i].transform.position.x, dogsLeftArray[i].transform.position.y), Quaternion.identity);
+            }
+        }
+        for(int i = 0; i < dogsRightArray.Length; i++){
+            if(dogsRightArray[i] != null){
+                Instantiate(dogRight, new Vector3(dogsRightArray[i].transform.position.x, dogsRightArray[i].transform.position.y), Quaternion.identity);
+            }
+        }
+    }
+
     // -------------------- Levels, launched via the levels ID. --------------------
 
     public void LevelOne(){
-        // CREATE ONE FUNCTION FOR THIS, THEN PASS A VAR FOR THE LEVEL
-        for(int i = 0; i < guardSpawnPointsLevelOne.Length; i++){
-            if(guardSpawnPointsLevelOne[i] != null){
-                Instantiate(guard, new Vector3(guardSpawnPointsLevelOne[i].transform.position.x, guardSpawnPointsLevelOne[i].transform.position.y), Quaternion.identity);
-            }
-            else{
-                Debug.Log("Object " + i + " is null");
-            }
-        }
+        SpawnEnemiesInLevel(1);
     }
 
     public void LevelTwo(){

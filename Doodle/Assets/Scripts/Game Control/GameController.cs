@@ -137,8 +137,8 @@ public class GameController : MonoBehaviour {
 		else if(Col.gameObject.layer == LayerMask.NameToLayer ("Guard")){
 			causeOfDeath = LayerMask.NameToLayer ("Guard");
 		}
-		else if(Col.gameObject.layer == LayerMask.NameToLayer ("ShadowDog")){
-			causeOfDeath = LayerMask.NameToLayer ("ShadowDog");
+		else if(Col.gameObject.layer == LayerMask.NameToLayer ("Dog")){
+			causeOfDeath = LayerMask.NameToLayer ("Dog");
 		}
 		else{
 			causeOfDeath = UIController.DEFAULT_DEATH_REASON;

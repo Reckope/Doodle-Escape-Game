@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 
 	// Global Variables
 	const int SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER = 1;
-	public static bool IsDead;
+	public static bool isDead;
 	public enum PlayerShootDir {left, notShooting, right};
 	public enum PlayerMoveDir {left, idle, right};
 	[SerializeField]
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
 		ProjectilePool = GetComponent<ProjectilePool>();
 		nextFire = 0.0f;
 		fireRate = 0.15f;
-		IsDead = false;
+		isDead = false;
 		Collider2D.enabled = true;
 		rb2d.constraints = RigidbodyConstraints2D.None;
 		shooting = PlayerShootDir.notShooting;
@@ -49,8 +49,10 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		MovePlayer();
-		Shoot();
+		if(!isDead){
+			MovePlayer();
+			Shoot();
+		}
 	}
 
 	// --------- Player Input ---------
@@ -143,10 +145,10 @@ public class Player : MonoBehaviour {
 	private void PlayerDie(int causeOfDeath){
 		// anim.SetTrigger(causeOfDeath);
 		// sound.Play(causeOfDeath);
-		Collider2D.enabled = false;
-		rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
+		//Collider2D.enabled = false;
+		rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
 		rb2d.velocity = (new Vector2 (0, 11f));
-		IsDead = true;
+		isDead = true;
 	}
 
 	// ***** Triggers and Collisions *****

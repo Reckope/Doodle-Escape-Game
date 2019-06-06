@@ -6,22 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Guard : Enemy{
 
-    // Components
-    Rigidbody2D rb2d;
-    SpriteRenderer spriteFace;
-    SpriteRenderer sprite;
-
     // GameObjects
-    public Transform guardFace;
+    public Transform face;
     public GameObject tazorLeft;
     public GameObject tazorRight;
-    public LayerMask whatIsWall;
-    public Transform leftCheck;
-    public Transform rightCheck;
+    //public LayerMask whatIsWall;
 
     // Global Variables
     const float COLLIDE_CHECK_RADIUS = 0.3f;
-    const int ENEMY_Y_POSITION = 0;
     const int GUARD_FOLLOW_RANGE = 15;
     private int direction;
     [SerializeField]
@@ -31,12 +23,10 @@ public class Guard : Enemy{
 
     // ---------------------------------------------------------------------------------
     void Start(){
-        rb2d = GetComponent<Rigidbody2D>();
-        sprite = GetComponent<SpriteRenderer>();
-        spriteFace = guardFace.GetComponent<SpriteRenderer>();
+        spriteFace = face.GetComponent<SpriteRenderer>();
         primaryTask = EnemyPrimaryTask.patrol;
         subTask = EnemySubTask.moveLeft;
-        rotation = guardFace.transform.rotation;
+        rotation = face.transform.rotation;
         maxSpeed = 2f;
         health = 100f;
         base.Start();
@@ -44,12 +34,12 @@ public class Guard : Enemy{
 
     // Update is called once per frame
     void Update(){
-        guardFace.transform.rotation = rotation;
+        face.transform.rotation = rotation;
         SetTasks();
-        //DetectPlayer();
         if(health > MIN_HEALTH){
             DetectPlayer();
-            if(Player.IsDead){
+            DetectedPlayer();
+            if(Player.isDead){
                 primaryTask = EnemyPrimaryTask.idle;
             }
         }
@@ -74,18 +64,18 @@ public class Guard : Enemy{
             Die();
             break;
             case EnemyPrimaryTask.idle:
-            // Idle
+            rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
             break;
         }
 
         switch(subTask){
             case EnemySubTask.moveLeft:
             direction = MOVE_LEFT;
-            faceLeft();
+            GuardFaceLeft();
             break;
             case EnemySubTask.moveRight:
             direction = MOVE_RIGHT;
-            faceRight();
+            GuardFaceRight();
             break;
         }
     }
@@ -113,22 +103,20 @@ public class Guard : Enemy{
         collidedRight = Physics2D.OverlapCircle (rightCheck.position, COLLIDE_CHECK_RADIUS, whatIsWall);
         // If the guard hits a wall, change their direction.
         if(collidedLeft){
-            direction = MOVE_RIGHT;
             subTask = EnemySubTask.moveRight;
         }
         else if(collidedRight && !collidedLeft){
-            direction = MOVE_LEFT;
             subTask = EnemySubTask.moveLeft;
         }
     }
 
-    private void faceRight(){
+    private void GuardFaceRight(){
         spriteFace.flipX = false;
         tazorLeft.SetActive(false);
         tazorRight.SetActive(true);
     }
 
-    private void faceLeft(){
+    private void GuardFaceLeft(){
         spriteFace.flipX = true;
         tazorLeft.SetActive(true);
         tazorRight.SetActive(false);
@@ -136,23 +124,8 @@ public class Guard : Enemy{
 
     // Once I see the player within range, I sprint forward to try and catch him. If I lose sight
     // of him, I attempt to follow / chase him. 
-    private void DetectPlayer(){
-        Vector2 lookDirection;
-        var raySpawn = transform.position;
-        var left = leftCheck.transform.position;
-        var right = rightCheck.transform.position;
-
-        if(subTask == EnemySubTask.moveLeft){
-            lookDirection = Vector2.left;
-            raySpawn = left;
-        }
-        else{
-            lookDirection = Vector2.right;
-            raySpawn = right;
-        }
-        RaycastHit2D guardVision = Physics2D.Raycast(raySpawn, lookDirection, ENEMY_LOOK_DISTANCE);
-
-        if(guardVision.collider != null && guardVision.collider.name == "Player"){
+    private void DetectedPlayer(){
+        if(DetectPlayer()){
             primaryTask = EnemyPrimaryTask.attack;
         }
         else if(alerted && DistanceBetweenPlayerAndEnemy() <= GUARD_FOLLOW_RANGE){
@@ -164,15 +137,8 @@ public class Guard : Enemy{
     }
 
     // Follow that prisoner!!
-    private void Follow(){
-        if(player.transform.position.x < transform.position.x){
-            direction = MOVE_LEFT;
-            subTask = EnemySubTask.moveLeft;
-        }
-        else if(player.transform.position.x > transform.position.x){
-            direction = MOVE_RIGHT;
-            subTask = EnemySubTask.moveRight;
-        }
+    public void Follow(){
+        MoveTowardsPlayer();
         MoveGuard();
     }
 
