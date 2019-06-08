@@ -149,10 +149,9 @@ MonoBehaviour:
   health: 30
   damageTaken: 10
   spriteAlpha: 1
-  maxSpeed: 50
-  alerted: 0
+  maxSpeed: 30
   face: {fileID: 8643992128911940204}
-  acceleration: 150
+  acceleration: 130
 --- !u!95 &8643992128533239372
 Animator:
   serializedVersion: 3

@@ -3,7 +3,7 @@
  * References: [1]
  * Code QA Sweep: DONE - 31/05/19
  * Notes:
- * If I really needed to get level data from a .txt file, I could use 'TextAsset levelText'.
+ * This is a intermediary script, used to read and manage the level data. 
  */
 
 using System;

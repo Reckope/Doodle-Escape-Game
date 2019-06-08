@@ -60,8 +60,10 @@ public class MovingPlatform : MonoBehaviour {
 	}
 
 	private void OnTriggerStay2D(Collider2D col){
-		player = col.gameObject;
-		offset = player.transform.position - transform.position;
+		if (col.gameObject.tag == ("Player")) {
+			player = col.gameObject;
+			offset = player.transform.position - transform.position;
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D col){

@@ -2,17 +2,27 @@
  * Project: Doodle Escape
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class EnemySpawnPoints{
+    public GameObject[] guardSpawnPoints;
+    public GameObject[] dogLeftSpawnPoints;
+    public GameObject[] dogRightSpawnPoints;
+}
+
 public class Levels : MonoBehaviour{
 
     LevelManager LevelManager;
+    EnemySpawnPoints SpawnPoints;
 
-    public GameObject[] guardSpawnPointsLevelOne;
-    public GameObject[] dogLeftSpawnPointsLevelOne;
-    public GameObject[] dogRightSpawnPointsLevelOne;
+    public EnemySpawnPoints[] levelOneSpawnPoints;
+    public EnemySpawnPoints[] levelTwoSpawnPoints;
+    public EnemySpawnPoints[] levelThreeSpawnPoints;
+    public EnemySpawnPoints[] levelFourSpawnPoints;
     public Transform guard;
     public Transform dogLeft;
     public Transform dogRight;
@@ -21,7 +31,7 @@ public class Levels : MonoBehaviour{
     // ---------------------------------------------------------------------------------
     void Start(){
         LevelManager = GameObject.FindObjectOfType(typeof(LevelManager)) as LevelManager;
-        fieldOfView = GameObject.Find("FieldOfView");
+        fieldOfView = GameObject.Find("FieldOfViewPlayer");
         fieldOfView.SetActive(false);
     }
 
@@ -34,71 +44,47 @@ public class Levels : MonoBehaviour{
         Invoke(id, 0f);
     }
 
-    // This is called from each level, to determine what enemies to spawn.
-    private void SpawnEnemiesInLevel(int level){
-        GameObject[] guardsArray = guardSpawnPointsLevelOne;
-        GameObject[] dogsLeftArray = dogLeftSpawnPointsLevelOne;
-        GameObject[] dogsRightArray = dogRightSpawnPointsLevelOne;
-
-        switch(level){
-            case 5:
-            break;
-            case 4:
-            break;
-            case 3:
-            break;
-            case 2:
-            break;
-            case 1:
-            guardsArray = guardSpawnPointsLevelOne;
-            dogsLeftArray = dogLeftSpawnPointsLevelOne;
-            dogsRightArray = dogRightSpawnPointsLevelOne;
-            break;
-            default:
-            guardsArray = null;
-            break;
-        }
-        SpawnEnemies(guardsArray, dogsLeftArray, dogsRightArray);
-    }
-
-    private void SpawnEnemies(GameObject[] guardsArray, GameObject[] dogsLeftArray, GameObject[] dogsRightArray){
-        for(int i = 0; i < guardsArray.Length; i++){
-            if(guardsArray[i] != null){
-                Instantiate(guard, new Vector3(guardsArray[i].transform.position.x, guardsArray[i].transform.position.y), Quaternion.identity);
+    // Using a jagged array, I am able to spawn different types of enemies into
+    // the level that was triggered.
+    void SpawnEnemies(EnemySpawnPoints[] level){
+        Debug.Log("Activated: " + level);
+        for(int i = 0; i < level.Length; i++){
+            for(int j = 0; j < level[i].guardSpawnPoints.Length; j++){
+                Instantiate(guard, new Vector3(level[i].guardSpawnPoints[j].transform.position.x, level[i].guardSpawnPoints[j].transform.position.y), Quaternion.identity);
             }
-        }
-        for(int i = 0; i < dogsLeftArray.Length; i++){
-            if(dogsLeftArray[i] != null){
-                Instantiate(dogLeft, new Vector3(dogsLeftArray[i].transform.position.x, dogsLeftArray[i].transform.position.y), Quaternion.identity);
+            for(int k = 0; k < level[i].dogLeftSpawnPoints.Length; k++){
+                Instantiate(dogLeft, new Vector3(level[i].dogLeftSpawnPoints[k].transform.position.x, level[i].dogLeftSpawnPoints[k].transform.position.y), Quaternion.identity);
             }
-        }
-        for(int i = 0; i < dogsRightArray.Length; i++){
-            if(dogsRightArray[i] != null){
-                Instantiate(dogRight, new Vector3(dogsRightArray[i].transform.position.x, dogsRightArray[i].transform.position.y), Quaternion.identity);
+            for(int l = 0; l < level[i].dogRightSpawnPoints.Length; l++){
+                Instantiate(dogRight, new Vector3(level[i].dogRightSpawnPoints[l].transform.position.x, level[i].dogRightSpawnPoints[l].transform.position.y), Quaternion.identity);
             }
         }
     }
 
     // -------------------- Levels, launched via the levels ID. --------------------
 
-    public void LevelOne(){
-        SpawnEnemiesInLevel(1);
+    private void LevelOne(){
+        SpawnEnemies(levelOneSpawnPoints);
     }
 
-    public void LevelTwo(){
+    private void LevelTwo(){
         //GameController.instance.SetHelpText("This is a test This is a test This is a test");
         fieldOfView.SetActive(true);
+        SpawnEnemies(levelTwoSpawnPoints);
     }
 
-    public void LevelThree(){
+    private void LevelThree(){
         //GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        Debug.Log("LEVEL THREEEE");
+        SpawnEnemies(levelThreeSpawnPoints);
     }
 
-    public void LevelFour(){
+    private void LevelFour(){
         //GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        SpawnEnemies(levelFourSpawnPoints);
     }
 
-    public void LevelFive(){
+    private void LevelFive(){
         GameController.instance.UnlockDoor();
     }
 }

@@ -1,29 +1,36 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape.
+ * Code QA Sweep: DONE - 08/06/19
+ * Notes:
+ * Attach this to the Guard object to set / manage its relevant tasks.  
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Dog : Enemy {
 
-    Quaternion rotation;
+    // Components
+    private Quaternion rotation;
     public Transform face;
     private Animator anim;
 
+    // Global Variables
     private int direction;
     [SerializeField]
     private float acceleration;
     private bool collidedLeft, collidedRight;
 
-    // Start is called before the first frame update
+    // ---------------------------------------------------------------------------------
     void Start(){
+        base.Start();
+        rotation = face.transform.rotation;
         spriteFace = face.GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         primaryTask = EnemyPrimaryTask.asleep;
-        //subTask = EnemySubTask.moveRight;
-        rotation = face.transform.rotation;
-        base.Start();
     }
 
-    // Update is called once per frame
     void Update(){
         face.transform.rotation = rotation;
         SetTasks();
@@ -41,16 +48,20 @@ public class Dog : Enemy {
         }
     }
 
+    // These are the main tasks for the dog. Once a task is set, the
+    // relevant methods are called. 
     private void SetTasks(){
         switch(primaryTask){
             case EnemyPrimaryTask.asleep:
             // Play snoring sound
+            rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
             break;
             case EnemyPrimaryTask.attack:
+            rb2d.constraints = RigidbodyConstraints2D.None;
             anim.SetTrigger("DogAwake");
             MoveTowardsPlayer();
             Attack();
-            MoveDog();
+            MoveEnemy(direction, acceleration);
             break;
             case EnemyPrimaryTask.dead:
             Die();
@@ -72,17 +83,9 @@ public class Dog : Enemy {
         }
     }
 
-    // ----- Tasks -----
-
-    private void MoveDog(){
-        Vector2 move = new Vector2 (direction, ENEMY_Y_POSITION);
-        if((rb2d.velocity.x >= -maxSpeed && rb2d.velocity.x <= maxSpeed)){
-            rb2d.AddForce(move * acceleration);
-        }
-    }
+    // ---------- Triggers ----------
 
     private void OnTriggerEnter2D (Collider2D collide){
-        // If the enemy gets hit by a projectile...
         if(collide.gameObject.layer == LayerMask.NameToLayer("Projectile") && health > MIN_HEALTH){
             TakeDamage(sprite);
         }
