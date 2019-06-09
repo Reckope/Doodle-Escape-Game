@@ -1,5 +1,10 @@
 ﻿/* Author: Joe Davis
- * Project: Doodle Escape
+ * Project: Doodle Escape.
+ * References: [2]
+ * Code QA Sweep: DONE - 09/06/19
+ * Notes:
+ * This is used to control what happens within each level, as
+ * well as invoking them. 
  */
 
 using System;
@@ -35,12 +40,19 @@ public class Levels : MonoBehaviour{
         fieldOfView.SetActive(false);
     }
 
+    void Update(){
+        if(Input.GetKeyDown("space")){
+            LevelFive();
+            GameController.instance.SetObjectiveText("Escape");
+        }
+    }
+
     // We get the level details from LevelManager.cs, and do whatever we want with the data.
-    // Including launching the levels function via the ID.
+    // Including launching the levels' method via the ID.
     public void LaunchLevel(string id, string name, string objective, int buildIndex, bool isActive){
         LevelManager.currentLevel = buildIndex;
         LevelManager.currentObjective = objective;
-        GameController.instance.SetHelpText("Level launched: " + name);
+        //GameController.instance.SetHelpText("Level launched: " + name);
         Invoke(id, 0f);
     }
 
@@ -75,7 +87,6 @@ public class Levels : MonoBehaviour{
 
     private void LevelThree(){
         //GameController.instance.SetHelpText("This is a test This is a test This is a test");
-        Debug.Log("LEVEL THREEEE");
         SpawnEnemies(levelThreeSpawnPoints);
     }
 

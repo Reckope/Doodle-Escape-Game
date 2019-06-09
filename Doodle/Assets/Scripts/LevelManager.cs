@@ -93,6 +93,7 @@ public class LevelManager : MonoBehaviour{
     }
 
     private void ActivateLevelBlocker(int level){
+        Debug.Log(level);
         if(levelBlockers[level] != null){
             levelBlockers[level].SetActive(true);
         }
@@ -103,7 +104,7 @@ public class LevelManager : MonoBehaviour{
     }
 
     // Once the player has collected a key, the game controller tells the level manager the level is complete. 
-    // This can be any key collected, and any method can simply call this to complete the level it tells it to. (S-Skip) ;) 
+    // This can be any key collected, and any method can simply call this to complete the level it tells it to. 
     public void CompletedLevel(int levelID){
         DisableLevelBlockers();
         UIController.HideObjectiveText();
@@ -112,7 +113,7 @@ public class LevelManager : MonoBehaviour{
         UpdateLevelData(levelID);
     }
 
-    private void UpdateLevelData(int levelID){
+    public void UpdateLevelData(int levelID){
         allLevels.levels[levelID].isActive = false;
         allLevels.levels[levelID].completed = true;
         Debug.Log("Level: " + levelID + " is active: " + allLevels.levels[levelID].isActive);

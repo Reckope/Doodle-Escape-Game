@@ -8,6 +8,7 @@ public class LevelTrigger : MonoBehaviour{
     LevelManager LevelManager;
 
     private int levelActivated;
+    const int ESCAPED_LEVEL = 5;
 
     // Start is called before the first frame update
     void Start(){
@@ -20,10 +21,19 @@ public class LevelTrigger : MonoBehaviour{
         string _levelActivated;
 
         if (Col.gameObject.tag == ("Player")) {
-            _levelActivated = this.gameObject.tag;
-            int.TryParse(_levelActivated, out levelActivated);
-            this.gameObject.SetActive(false);
-            LevelManager.ActivateLevel(levelActivated);
+            if(this.gameObject.layer == LayerMask.NameToLayer("Level")){
+                _levelActivated = this.gameObject.tag;
+                int.TryParse(_levelActivated, out levelActivated);
+                LevelManager.ActivateLevel(levelActivated);
+                this.gameObject.SetActive(false);
+            }
+            else if(this.gameObject.tag == "EscapeTransition"){
+                GameController.instance.StartTransition();
+            }
+            else if(this.gameObject.tag == "Escaped"){
+                GameController.instance.CompleteGame();
+                LevelManager.UpdateLevelData(ESCAPED_LEVEL);
+            }
         }
     }
 }

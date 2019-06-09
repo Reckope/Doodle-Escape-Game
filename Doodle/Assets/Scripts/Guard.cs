@@ -89,8 +89,12 @@ public class Guard : Enemy{
 
     private float DistanceBetweenPlayerAndEnemy(){
         float distance;
-
-        distance = Vector2.Distance(player.transform.position, gameObject.transform.position);
+        if(player != null){
+            distance = Vector2.Distance(player.transform.position, gameObject.transform.position);
+        }
+        else{
+            distance = 0;
+        }
         return distance;
     }
 

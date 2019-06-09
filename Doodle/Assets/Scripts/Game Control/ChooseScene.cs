@@ -4,6 +4,7 @@
  * This is used to switch between each scene.
  */
 
+using UnityEngine.Video;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChooseScene : MonoBehaviour {
+
+	public VideoPlayer VideoPlayer;
+	public GameObject Menu;
 
 	// Global Variables
 	[SerializeField]
@@ -26,8 +30,14 @@ public class ChooseScene : MonoBehaviour {
 	void Start(){
 	}
 
+	public void PlayCutscene(){
+		Menu.SetActive(false);
+		VideoPlayer.Play();
+		VideoPlayer.loopPointReached += StartGameScene;
+	}
+
 	// Start the Game
-	public void StartGameScene(){
+	public void StartGameScene(VideoPlayer vp){
 		SceneManager.LoadScene(this.gameScene);
 	}
 

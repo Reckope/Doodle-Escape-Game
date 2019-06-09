@@ -6,38 +6,60 @@ public class CameraController : MonoBehaviour {
 
 	// GameObjects
 	public Transform player;
+	public Transform targetPoint;
 	Camera Camera;
 
-	const float FOLLOW_PLAYER_DAMP_TIME = 0.15f;
-	const float CAMERA_MIN_X_BOUNDS = -22.7f;
-	const float CAMERA_MAX_X_BOUNDS = 22.7f;
-	const float CAMERA_MIN_Y_BOUNDS = -13.6f;
-	const float CAMERA_MAX_Y_BOUNDS = 13.6f;
+	const float FOLLOW_PLAYER_DAMP_TIME = 0.25f;
+	const float CAMERA_ESCAPE_Y_POSITION = -25f;
 	const float CAMERA_DELTA_X_POSITION = 0.5f;
 	const float CAMERA_DELTA_Y_POSITION = 0.5f;
 	const float CAMERA_DISTANCE_ABOVE_PLAYER = 1f;
+	const float LOWER_GROUND_Y_POSITION = -26.5f;
+	const float LOWER_GROUND_FINISH_POINT = 22f;
+	private float cameraDistanceAheadOfPlayer;
+	private float cameraMaxXBounds;
+	private float cameraMinXBounds;
+	private float cameraMinYBounds;
+	private float cameraMaxYBounds;
+	public bool playerReachedLowerGround;
 
 	private Vector3 velocity = Vector3.zero;
 
-	// Use this for initialization
+	// ---------------------------------------------------------------------------------
 	void Start () {
 		Camera = GetComponent<Camera>();
+		cameraMaxYBounds = 13.6f;
+		cameraMinYBounds = -13.6f;
+		cameraMinXBounds = -22.7f;
+		cameraMaxXBounds = 22.7f;
+		cameraDistanceAheadOfPlayer = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		if (player != null){
+		if (player != null && !GameController.instance.inTransition){
 			FollowPlayer();
+		}
+		else if(GameController.instance.inTransition){
+			CameraEscapeTransition();
 		}
 	}
 
 	private void FollowPlayer(){
-			Vector3 point = Camera.WorldToViewportPoint(player.position);
-			Vector3 delta = player.position - Camera.ViewportToWorldPoint(new Vector3(CAMERA_DELTA_X_POSITION, CAMERA_DELTA_Y_POSITION, point.z));
-			Vector3 destination = transform.position + delta;
-			destination.x = Mathf.Clamp (destination.x, CAMERA_MIN_X_BOUNDS, CAMERA_MAX_X_BOUNDS);
-			destination.y = Mathf.Clamp (destination.y + CAMERA_DISTANCE_ABOVE_PLAYER, CAMERA_MIN_Y_BOUNDS, CAMERA_MAX_Y_BOUNDS);
-			transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, FOLLOW_PLAYER_DAMP_TIME);
+		Vector3 point = Camera.WorldToViewportPoint(player.position);
+		Vector3 delta = player.position - Camera.ViewportToWorldPoint(new Vector3(CAMERA_DELTA_X_POSITION, CAMERA_DELTA_Y_POSITION, point.z));
+		Vector3 destination = transform.position + delta;
+		destination.x = Mathf.Clamp (destination.x + cameraDistanceAheadOfPlayer, cameraMinXBounds, cameraMaxXBounds);
+		destination.y = Mathf.Clamp (destination.y + CAMERA_DISTANCE_ABOVE_PLAYER, cameraMinYBounds, cameraMaxYBounds);
+		transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, FOLLOW_PLAYER_DAMP_TIME);
+	}
+
+	public void CameraEscapeTransition(){
+		transform.position = Vector3.Lerp(transform.position, targetPoint.position, Time.deltaTime);
+		cameraMinYBounds = -25f;
+		cameraMinXBounds = 0f;
+		cameraMaxYBounds = -25f;
+		cameraMaxXBounds = 55f;
+		cameraDistanceAheadOfPlayer = 2f;
 	}
 }

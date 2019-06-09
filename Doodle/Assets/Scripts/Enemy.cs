@@ -97,11 +97,13 @@ public abstract class Enemy : MonoBehaviour{
     }
 
     public void MoveTowardsPlayer(){
-        if(player.transform.position.x < transform.position.x){
-            subTask = EnemySubTask.moveLeft;
-        }
-        else if(player.transform.position.x > transform.position.x){
-            subTask = EnemySubTask.moveRight;
+        if(player != null){
+            if(player.transform.position.x < transform.position.x){
+                subTask = EnemySubTask.moveLeft;
+            }
+            else if(player.transform.position.x > transform.position.x){
+                subTask = EnemySubTask.moveRight;
+            }
         }
     }
 

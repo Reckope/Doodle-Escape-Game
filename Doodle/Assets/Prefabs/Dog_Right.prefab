@@ -147,7 +147,7 @@ MonoBehaviour:
   enemyLayerMask: 0
   groundLayerMask: 0
   health: 30
-  damageTaken: 10
+  damageTaken: 15
   spriteAlpha: 1
   maxSpeed: 30
   face: {fileID: 8643992128911940204}

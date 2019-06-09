@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(!isDead){
+		if(!isDead && !GameController.instance.inTransition){
 			MovePlayer();
 			Shoot();
 		}
@@ -63,6 +63,7 @@ public class Player : MonoBehaviour {
 		float moveHorizontal;
 
 		// Move the main character.
+		rb2d.bodyType = RigidbodyType2D.Dynamic;
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, whatIsGround);
 		moveHorizontal = Input.GetAxisRaw("Horizontal");
 		Vector2 movement = new Vector2 (moveHorizontal, 0);
@@ -145,13 +146,31 @@ public class Player : MonoBehaviour {
 	private void PlayerDie(int causeOfDeath){
 		// anim.SetTrigger(causeOfDeath);
 		// sound.Play(causeOfDeath);
-		//Collider2D.enabled = false;
+		Collider2D.enabled = false;
 		rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
-		rb2d.velocity = (new Vector2 (0, 11f));
 		isDead = true;
 	}
 
-	// ***** Triggers and Collisions *****
+	public void PlayerEscapeTransition(){
+		float transitionDirection = -1f;
+		float transitionSpeed = 4.5f;
+		var rotation = transform.rotation.eulerAngles;
+		rotation.z = 0;
+
+		rb2d.bodyType = RigidbodyType2D.Static;
+		transform.rotation = Quaternion.Euler(rotation);
+		transform.Translate(0, transitionDirection * transitionSpeed * Time.deltaTime * 1, 0);
+	}
+
+	public void PlayerEndTransition(){
+		rb2d.bodyType = RigidbodyType2D.Dynamic;
+	}
+
+	public void PlayerCompleteGame(){
+		Destroy(gameObject);
+	}
+
+	// ---------- Triggers and Collisions ----------
 
 	// When the player collides with something
 	private void OnCollisionEnter2D(Collision2D Col){

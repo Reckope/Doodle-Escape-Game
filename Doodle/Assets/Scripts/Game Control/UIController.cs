@@ -29,6 +29,7 @@ public class UIController : MonoBehaviour{
 
     // GameObjects
     public GameObject gameOverUI;
+    public GameObject gameCompleteUI;
     public GameObject objectiveTextHolder;
     public GameObject helpTextHolder;
     public Text causeOfDeathDisplayText;
@@ -54,6 +55,7 @@ public class UIController : MonoBehaviour{
         objectiveTextHolder.SetActive(true);
         helpTextHolder.SetActive(false);
         gameOverUI.SetActive(false);
+        gameCompleteUI.SetActive(false);
         textOpacity = 0f;
         objectiveText.text = null;
         applicationDataPath = Application.dataPath;
@@ -134,6 +136,16 @@ public class UIController : MonoBehaviour{
         }
         else{
             Debug.Log("Error: Can't find Game Over UI Object.");
+        }
+    }
+
+    public void DisplayGameCompleteUI(){
+        if(gameCompleteUI != null){
+            HideAllUI();
+            gameCompleteUI.SetActive(true);
+        }
+        else{
+            Debug.Log("Error: Can't find Game Complete UI Object.");
         }
     }
 

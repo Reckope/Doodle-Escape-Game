@@ -10,17 +10,22 @@ public class GameController : MonoBehaviour {
 	// Scripts
 	LevelManager LevelManager;
 	UIController UIController;
+	CameraController CameraController;
+	CinematicBars CinematicBars;
+	Player Player;
 
 	// GameObjects & components
-    public GameObject[] keys = new GameObject[4];
-    public Transform[] spawnPoints = new Transform[4];
-    private GameObject key;
+	public GameObject[] keys = new GameObject[4];
+	public Transform[] spawnPoints = new Transform[4];
+	private GameObject key;
 	GameObject Door;
 
 	// Global Variables
 	const int FINISHED_LEVEL_VALUE = -1;
+	const int END_TRANSITION_POINT = -15;
 	public int numberOfKeysRemaining;
-	//public string objective;
+	public bool escaping;
+	public bool inTransition;
 
 	void Awake () {
 		Door = GameObject.Find("Door");
@@ -29,14 +34,21 @@ public class GameController : MonoBehaviour {
 		}
 		LevelManager = GameObject.FindObjectOfType(typeof(LevelManager)) as LevelManager;
 		UIController = GameObject.FindObjectOfType(typeof(UIController)) as UIController;
+		CameraController = GameObject.FindObjectOfType(typeof(CameraController)) as CameraController;
+		CinematicBars = GameObject.FindObjectOfType(typeof(CinematicBars)) as CinematicBars;
+		Player = GameObject.FindObjectOfType(typeof(Player)) as Player;
 		GameSettings();
 		numberOfKeysRemaining = 0;
 		SpawnKeys();
+		escaping = false;
+		inTransition = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(inTransition){
+			DuringTransition();
+		}
 	}
 
 	// Instance / target framerate.
@@ -145,5 +157,33 @@ public class GameController : MonoBehaviour {
 		}
 
 		return causeOfDeath;
+	}
+
+	public void StartTransition(){
+		escaping = true;
+		inTransition = true;
+	}
+
+	public void DuringTransition(){
+		var playerPosition = GameObject.Find("Player").transform.position.y;
+
+		Player.PlayerEscapeTransition();
+		CinematicBars.ShowCinematicBars();
+		if(playerPosition < END_TRANSITION_POINT){
+			EndTransition();
+		}
+	}
+
+	public void EndTransition(){
+		Debug.Log("END");
+		inTransition = false;
+		Player.PlayerEndTransition();
+		//CinematicBars.HideCinematicBars();
+	}
+
+	public void CompleteGame(){
+		UIController.DisplayGameCompleteUI();
+		Player.PlayerCompleteGame();
+		CinematicBars.HideCinematicBars();
 	}
 }
