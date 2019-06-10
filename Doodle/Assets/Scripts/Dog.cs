@@ -39,7 +39,7 @@ public class Dog : Enemy {
             if(DetectPlayer()){
                 primaryTask = EnemyPrimaryTask.attack;
             }
-            if(Player.isDead){
+            else if(Player.isDead){
                 primaryTask = EnemyPrimaryTask.idle;
             }
         }

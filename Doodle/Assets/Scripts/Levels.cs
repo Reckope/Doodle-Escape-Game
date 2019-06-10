@@ -1,7 +1,7 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape.
  * References: [2]
- * Code QA Sweep: DONE - 09/06/19
+ * Code QA Sweep: DONE - 10/06/19
  * Notes:
  * This is used to control what happens within each level, as
  * well as invoking them. 
@@ -21,17 +21,21 @@ public class EnemySpawnPoints{
 
 public class Levels : MonoBehaviour{
 
+    // Other Classes.
     LevelManager LevelManager;
     EnemySpawnPoints SpawnPoints;
 
-    public EnemySpawnPoints[] levelOneSpawnPoints;
-    public EnemySpawnPoints[] levelTwoSpawnPoints;
-    public EnemySpawnPoints[] levelThreeSpawnPoints;
-    public EnemySpawnPoints[] levelFourSpawnPoints;
+    // GameObjects
     public Transform guard;
     public Transform dogLeft;
     public Transform dogRight;
     GameObject fieldOfView;
+
+    // Global Variables
+    public EnemySpawnPoints[] levelOneSpawnPoints;
+    public EnemySpawnPoints[] levelTwoSpawnPoints;
+    public EnemySpawnPoints[] levelThreeSpawnPoints;
+    public EnemySpawnPoints[] levelFourSpawnPoints;
 
     // ---------------------------------------------------------------------------------
     void Start(){
@@ -40,19 +44,11 @@ public class Levels : MonoBehaviour{
         fieldOfView.SetActive(false);
     }
 
-    void Update(){
-        if(Input.GetKeyDown("space")){
-            LevelFive();
-            GameController.instance.SetObjectiveText("Escape");
-        }
-    }
-
     // We get the level details from LevelManager.cs, and do whatever we want with the data.
     // Including launching the levels' method via the ID.
     public void LaunchLevel(string id, string name, string objective, int buildIndex, bool isActive){
         LevelManager.currentLevel = buildIndex;
         LevelManager.currentObjective = objective;
-        //GameController.instance.SetHelpText("Level launched: " + name);
         Invoke(id, 0f);
     }
 
@@ -76,22 +72,23 @@ public class Levels : MonoBehaviour{
     // -------------------- Levels, launched via the levels ID. --------------------
 
     private void LevelOne(){
+        GameController.instance.SetHelpText("If the guards spot you on your mission to escape, things will get very messy.");
         SpawnEnemies(levelOneSpawnPoints);
     }
 
     private void LevelTwo(){
-        //GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        GameController.instance.SetHelpText("The dogs can still sense your presence in the dark...");
         fieldOfView.SetActive(true);
         SpawnEnemies(levelTwoSpawnPoints);
     }
 
     private void LevelThree(){
-        //GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        GameController.instance.SetHelpText("Be careful not to fall off the platform, lava has been known to instantly burn prisoners who attempt to steal from the prison.");
         SpawnEnemies(levelThreeSpawnPoints);
     }
 
     private void LevelFour(){
-        //GameController.instance.SetHelpText("This is a test This is a test This is a test");
+        GameController.instance.SetHelpText("Prisoners have been known to mistime their jump, resulting in being savagely tased by the guard patrolling the area.");
         SpawnEnemies(levelFourSpawnPoints);
     }
 

@@ -162,7 +162,7 @@ MonoBehaviour:
   leftCheck: {fileID: 2137237058}
   rightCheck: {fileID: 1567523344}
   subTask: 1
-  primaryTask: 4
+  primaryTask: 0
   enemyLayerMask: 0
   groundLayerMask: 0
   health: 100
@@ -1595,7 +1595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c86841de567b4954aa15f948f9f7880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VideoPlayer: {fileID: 1629902265}
+  IntroCutscene: {fileID: 1629902265}
   Menu: {fileID: 1954623438}
   gameScene: Game
   rulesScene: How to Play

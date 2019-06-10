@@ -61,6 +61,7 @@ public class UIController : MonoBehaviour{
         applicationDataPath = Application.dataPath;
         jsonData = File.ReadAllText(Application.dataPath + LEVEL_DATA_JSON_PATH);
         allDeathStrings = JsonUtility.FromJson<DeathStringDataCollection>(jsonData);
+        DisplayHelpText("There are 4 keys located within this prison. Find them all to escape.");
     }
 
     // Update is called once per frame

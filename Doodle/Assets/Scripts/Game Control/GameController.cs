@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape
+ * Code QA Sweep: DONE - 10/06/19
+ * Notes:
+ * This is an intermediary script. This controls the main flow of the game, and
+ * contains the key methods that other classes can call / pass params through. 
+ */
+
+using UnityEngine.Video;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +24,7 @@ public class GameController : MonoBehaviour {
 	Player Player;
 
 	// GameObjects & components
+	public VideoPlayer endCutscene;
 	public GameObject[] keys = new GameObject[4];
 	public Transform[] spawnPoints = new Transform[4];
 	private GameObject key;
@@ -27,6 +37,7 @@ public class GameController : MonoBehaviour {
 	public bool escaping;
 	public bool inTransition;
 
+	// ---------------------------------------------------------------------------------
 	void Awake () {
 		Door = GameObject.Find("Door");
 		if(Door == null){
@@ -38,7 +49,6 @@ public class GameController : MonoBehaviour {
 		CinematicBars = GameObject.FindObjectOfType(typeof(CinematicBars)) as CinematicBars;
 		Player = GameObject.FindObjectOfType(typeof(Player)) as Player;
 		GameSettings();
-		numberOfKeysRemaining = 0;
 		SpawnKeys();
 		escaping = false;
 		inTransition = false;
@@ -66,13 +76,15 @@ public class GameController : MonoBehaviour {
 	}
 
 	private void SpawnKeys(){
+		numberOfKeysRemaining = 0;
         for(int x = 0; x < keys.Length; x++){
             key = (GameObject)Instantiate (keys[x], spawnPoints[x].position, Quaternion.identity);
             GameController.instance.numberOfKeysRemaining++;
         }
     }
 
-	// When the player collects a key
+	// When the player collects a key, warp the key to it's allocated lock
+	// and decrement the total remaining by 1. 
 	public void CollectedKey(string keyColour){
 		numberOfKeysRemaining--;
 		WarpKeyToLock(keyColour);
@@ -98,7 +110,7 @@ public class GameController : MonoBehaviour {
 			keyPlural = "Keys";
 			keyVerb = "are";
 		}
-		helptext = "You've obtained a key! There " + keyVerb + " now " + numberOfKeysRemaining + " " + keyPlural + " remaining. Return to the start position and track down the remaining " + keyPlural + ".";
+		helptext = "You've obtained a key! There " + keyVerb + " now " + numberOfKeysRemaining + " remaining. Return to the start position and track down the remaining " + keyPlural + ".";
 		if(numberOfKeysRemaining == 0){
 			helptext = "All the keys have been collected! The door is now unlocked.";
 		}
@@ -111,14 +123,14 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	// Game Over
 	public bool GameOver(int causeOfDeath){
 		UIController.DisplayGameOverUI(causeOfDeath);
-		// Freeze everything
 		// sad music
 		return true;
 	}
 
+	// We set the UI strings by passing paramaters from various methods,
+	// then tell the UIController to display that string. 
 	public void SetObjectiveText(string objective){
 		if(objective != null){
 			UIController.DisplayObjectiveText(objective);
@@ -134,6 +146,8 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	// Need to detect what killed the player by getting the Layermask value
+	// and setting the causeOfDeath to that value. 
 	public int FindDeathReason(Collision2D Col){
 		int causeOfDeath;
 
@@ -155,10 +169,11 @@ public class GameController : MonoBehaviour {
 		else{
 			causeOfDeath = UIController.DEFAULT_DEATH_REASON;
 		}
-
 		return causeOfDeath;
 	}
 
+	// When escaping, perform various actions before, during and after the
+	// transition down to the lower gound. 
 	public void StartTransition(){
 		escaping = true;
 		inTransition = true;
@@ -178,12 +193,20 @@ public class GameController : MonoBehaviour {
 		Debug.Log("END");
 		inTransition = false;
 		Player.PlayerEndTransition();
-		//CinematicBars.HideCinematicBars();
+		CinematicBars.HideCinematicBars();
 	}
 
-	public void CompleteGame(){
-		UIController.DisplayGameCompleteUI();
+	// Once the player reaches the escape trigger, play the final cutscene
+	// and end the game. 
+	public void PlayFinalCutscene(){
+		UIController.HideAllUI();
 		Player.PlayerCompleteGame();
+		endCutscene.Play();
+		endCutscene.loopPointReached += CompleteGame;
+	}
+
+	public void CompleteGame(VideoPlayer vp){
 		CinematicBars.HideCinematicBars();
+		UIController.DisplayGameCompleteUI();
 	}
 }

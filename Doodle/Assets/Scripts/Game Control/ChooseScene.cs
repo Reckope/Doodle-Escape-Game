@@ -13,7 +13,7 @@ using UnityEngine.UI;
 
 public class ChooseScene : MonoBehaviour {
 
-	public VideoPlayer VideoPlayer;
+	public VideoPlayer IntroCutscene;
 	public GameObject Menu;
 
 	// Global Variables
@@ -26,14 +26,10 @@ public class ChooseScene : MonoBehaviour {
 	[SerializeField]
 	private string mainMenuScene = "Main Menu";
 
-	// Use this for initialization
-	void Start(){
-	}
-
 	public void PlayCutscene(){
 		Menu.SetActive(false);
-		VideoPlayer.Play();
-		VideoPlayer.loopPointReached += StartGameScene;
+		IntroCutscene.Play();
+		IntroCutscene.loopPointReached += StartGameScene;
 	}
 
 	// Start the Game

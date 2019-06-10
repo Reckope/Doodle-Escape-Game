@@ -31,8 +31,9 @@ public class LevelTrigger : MonoBehaviour{
                 GameController.instance.StartTransition();
             }
             else if(this.gameObject.tag == "Escaped"){
-                GameController.instance.CompleteGame();
+                GameController.instance.PlayFinalCutscene();
                 LevelManager.UpdateLevelData(ESCAPED_LEVEL);
+                
             }
         }
     }

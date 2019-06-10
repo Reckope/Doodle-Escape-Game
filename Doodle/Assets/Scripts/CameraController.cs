@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape
+ * Code QA Sweep: DONE - 10/06/19
+ * Notes:
+ * This is used to control all of the camera movements. 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +16,7 @@ public class CameraController : MonoBehaviour {
 	public Transform targetPoint;
 	Camera Camera;
 
+	// Global Variables
 	const float FOLLOW_PLAYER_DAMP_TIME = 0.25f;
 	const float CAMERA_ESCAPE_Y_POSITION = -25f;
 	const float CAMERA_DELTA_X_POSITION = 0.5f;
@@ -21,8 +29,6 @@ public class CameraController : MonoBehaviour {
 	private float cameraMinXBounds;
 	private float cameraMinYBounds;
 	private float cameraMaxYBounds;
-	public bool playerReachedLowerGround;
-
 	private Vector3 velocity = Vector3.zero;
 
 	// ---------------------------------------------------------------------------------
@@ -45,6 +51,8 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 
+	// Constantly follow the player throughout the game, whilst stopping when reaching
+	// the edge of the game world. 
 	private void FollowPlayer(){
 		Vector3 point = Camera.WorldToViewportPoint(player.position);
 		Vector3 delta = player.position - Camera.ViewportToWorldPoint(new Vector3(CAMERA_DELTA_X_POSITION, CAMERA_DELTA_Y_POSITION, point.z));
@@ -54,6 +62,8 @@ public class CameraController : MonoBehaviour {
 		transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, FOLLOW_PLAYER_DAMP_TIME);
 	}
 
+	// When the player is escaping, move the camera downwards and change it's 
+	// min / max bounds. 
 	public void CameraEscapeTransition(){
 		transform.position = Vector3.Lerp(transform.position, targetPoint.position, Time.deltaTime);
 		cameraMinYBounds = -25f;
