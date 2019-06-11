@@ -30,6 +30,7 @@ public class LevelDataCollection {
 }
 
 public class LevelManager : MonoBehaviour{
+    
     // Other classes
     Levels Levels;
     UIController UIController;
@@ -42,27 +43,53 @@ public class LevelManager : MonoBehaviour{
     // Global Variables
     const int NOT_ON_LEVEL_BUILD_INDEX = 0;
     const int FINAL_LEVEL_BUILD_INDEX = 5;
-    const string LEVEL_DATA_JSON_PATH = "/Scripts/Data/LevelData.json";
     public static int currentLevel;
     public static string currentObjective;
-    private string applicationDataPath, jsonData;
 
     // ---------------------------------------------------------------------------------
     void Start(){
         Levels = GameObject.FindObjectOfType(typeof(Levels)) as Levels;
         UIController = GameObject.FindObjectOfType(typeof(UIController)) as UIController;
         startPoint = GameObject.Find("NotOnLevel");
-        applicationDataPath = Application.dataPath;
         DisableLevelBlockers();
-        jsonData = File.ReadAllText(Application.dataPath + LEVEL_DATA_JSON_PATH);
-        allLevels = JsonUtility.FromJson<LevelDataCollection>(jsonData);
+        PlayLevelMusic(Levels.levelMusic[Levels.LEVEL_ZERO_MUSIC]);
+        // Load the data for each of the levels. 
+        TextAsset txtAsset = (TextAsset)Resources.Load("LevelData", typeof(TextAsset));
+        String levelData = txtAsset.text;
+        allLevels = JsonUtility.FromJson<LevelDataCollection>(levelData);
     }
+
+    void Update(){
+        if(Player.isDead){
+            StopLevelMusic(Levels.levelMusic[currentLevel]);
+        }
+    }
+
+    // Control the music for each level. 
+    public void PlayLevelMusic(AudioSource music){
+        if(music != null){
+		    music.Play();
+        }
+        else{
+            Debug.Log("ERROR: NO LEVEL MUSIC FOUND");
+        }
+	}
+
+	public void StopLevelMusic(AudioSource music){
+		if(music != null){
+		    music.Stop();
+        }
+        else{
+            Debug.Log("ERROR: NO LEVEL MUSIC FOUND");
+        }
+	}
 
     // Start each level depending on what trigger was activated, and block the player from exiting. 
     public void ActivateLevel(int levelID){
         // Disable NotOnLevel once another level has been actived. 
         if(levelID != NOT_ON_LEVEL_BUILD_INDEX){
             allLevels.levels[NOT_ON_LEVEL_BUILD_INDEX].isActive = false;
+            //StopLevelMusic(Levels.levelMusic[Levels.LEVEL_ZERO_MUSIC]);
             Debug.Log("Disbaled Level 0");
         }
         if(GameController.instance.numberOfKeysRemaining >= 1){
@@ -111,6 +138,8 @@ public class LevelManager : MonoBehaviour{
         GameController.instance.CompleteLevelHelpText();
         startPoint.SetActive(true);
         UpdateLevelData(levelID);
+        StopLevelMusic(Levels.levelMusic[levelID]);
+        PlayLevelMusic(Levels.levelMusic[Levels.LEVEL_ZERO_MUSIC]);
     }
 
     public void UpdateLevelData(int levelID){
@@ -118,6 +147,7 @@ public class LevelManager : MonoBehaviour{
         allLevels.levels[levelID].completed = true;
         Debug.Log("Level: " + levelID + " is active: " + allLevels.levels[levelID].isActive);
         Debug.Log("Level " + levelID + " is completed: " + allLevels.levels[levelID].completed);
+        currentLevel = NOT_ON_LEVEL_BUILD_INDEX;
     }
 
     private void DisableLevelBlockers(){

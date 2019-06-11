@@ -29,9 +29,16 @@ public class Levels : MonoBehaviour{
     public Transform guard;
     public Transform dogLeft;
     public Transform dogRight;
+    public AudioSource[] levelMusic;
     GameObject fieldOfView;
 
     // Global Variables
+    public const int LEVEL_ZERO_MUSIC = 0;
+    public const int LEVEL_ONE_MUSIC = 1;
+    public const int LEVEL_TWO_MUSIC = 2;
+    public const int LEVEL_THREE_MUSIC = 3;
+    public const int LEVEL_FOUR_MUSIC = 4;
+    public const int LEVEL_FIVE_MUSIC = 5;
     public EnemySpawnPoints[] levelOneSpawnPoints;
     public EnemySpawnPoints[] levelTwoSpawnPoints;
     public EnemySpawnPoints[] levelThreeSpawnPoints;
@@ -49,11 +56,17 @@ public class Levels : MonoBehaviour{
     public void LaunchLevel(string id, string name, string objective, int buildIndex, bool isActive){
         LevelManager.currentLevel = buildIndex;
         LevelManager.currentObjective = objective;
+        if(buildIndex != LEVEL_ZERO_MUSIC){
+            LevelManager.StopLevelMusic(levelMusic[LEVEL_ZERO_MUSIC]);
+            LevelManager.PlayLevelMusic(levelMusic[buildIndex]);
+        }
         Invoke(id, 0f);
     }
 
     // Using a jagged array, I am able to spawn different types of enemies into
     // the level that was triggered.
+    // I tried to pass SpawnPoints.[enemy]SpawnPoints as a param to reduce code duplication,
+    // but it wasn't working. 
     void SpawnEnemies(EnemySpawnPoints[] level){
         Debug.Log("Activated: " + level);
         for(int i = 0; i < level.Length; i++){
@@ -72,8 +85,10 @@ public class Levels : MonoBehaviour{
     // -------------------- Levels, launched via the levels ID. --------------------
 
     private void LevelOne(){
+        //LevelManager.StopLevelMusic(levelMusic[LEVEL_ZERO_MUSIC]);
         GameController.instance.SetHelpText("If the guards spot you on your mission to escape, things will get very messy.");
         SpawnEnemies(levelOneSpawnPoints);
+        //LevelManager.PlayLevelMusic(levelMusic[LEVEL_ONE_MUSIC]);
     }
 
     private void LevelTwo(){

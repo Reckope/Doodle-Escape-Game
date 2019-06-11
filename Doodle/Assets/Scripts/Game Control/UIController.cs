@@ -42,11 +42,9 @@ public class UIController : MonoBehaviour{
     const float FADE_TIME = 1.1f;
     const float HELP_TEXT_DISPLAY_TIME = 8f;
     const float OBJECTIVE_TEXT_DISPLAY_TIME = 20f;
-    const string LEVEL_DATA_JSON_PATH = "/Scripts/Data/CauseOfDeathData.json";
     private enum TextFade {fadeIn, fadeOut};
     private bool helpTextIsActive, objectiveTextIsActive;
     private float textOpacity, helpTextTimer, objectiveTextTimer;
-    private string applicationDataPath, jsonData;
 
     TextFade textFade;
 
@@ -58,10 +56,11 @@ public class UIController : MonoBehaviour{
         gameCompleteUI.SetActive(false);
         textOpacity = 0f;
         objectiveText.text = null;
-        applicationDataPath = Application.dataPath;
-        jsonData = File.ReadAllText(Application.dataPath + LEVEL_DATA_JSON_PATH);
-        allDeathStrings = JsonUtility.FromJson<DeathStringDataCollection>(jsonData);
         DisplayHelpText("There are 4 keys located within this prison. Find them all to escape.");
+        // Load the data for the causes of death strings. 
+        TextAsset txtAssetUI = (TextAsset)Resources.Load("CauseOfDeathData", typeof(TextAsset));
+        String causeData = txtAssetUI.text;
+        allDeathStrings = JsonUtility.FromJson<DeathStringDataCollection>(causeData);
     }
 
     // Update is called once per frame
