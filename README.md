@@ -13,6 +13,7 @@ References:
 [2] Unity, (2012), Writing Jagged Arrays, Available at "https://answers.unity.com/questions/276919/writing-jagged-arrays.html" [Referenced in Levels.cs].
 
 Audio Credits (to be added in game)
+    Menu Music - Evasion by Matthew Pablo
     Not On Level Music - Opening Theme by Nene
     Level One Music - Commando Team (Action) by Grégoire Lourme
     Level Two Music - Western by Shalpin

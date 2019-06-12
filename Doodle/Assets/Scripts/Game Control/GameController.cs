@@ -25,8 +25,8 @@ public class GameController : MonoBehaviour {
 
 	// GameObjects & components
 	public VideoPlayer endCutscene;
-	public GameObject[] keys = new GameObject[4];
-	public Transform[] spawnPoints = new Transform[4];
+	public GameObject[] keys;
+	public Transform[] spawnPoints;
 	private GameObject key;
 	GameObject Door;
 
@@ -201,6 +201,7 @@ public class GameController : MonoBehaviour {
 	public void PlayFinalCutscene(){
 		UIController.HideAllUI();
 		Player.PlayerCompleteGame();
+		LevelManager.StopLevelMusic(LevelManager.levelMusic[LevelManager.currentLevel]);
 		endCutscene.Play();
 		endCutscene.loopPointReached += CompleteGame;
 	}

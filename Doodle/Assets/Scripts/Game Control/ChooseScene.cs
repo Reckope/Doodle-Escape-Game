@@ -14,6 +14,7 @@ using UnityEngine.UI;
 public class ChooseScene : MonoBehaviour {
 
 	public VideoPlayer IntroCutscene;
+	public AudioSource menuMusic;
 	public GameObject Menu;
 
 	// Global Variables
@@ -27,6 +28,7 @@ public class ChooseScene : MonoBehaviour {
 	private string mainMenuScene = "Main Menu";
 
 	public void PlayCutscene(){
+		menuMusic.Stop();
 		Menu.SetActive(false);
 		IntroCutscene.Play();
 		IntroCutscene.loopPointReached += StartGameScene;

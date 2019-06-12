@@ -55,25 +55,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\CinematicBars.cs" />
-     <Compile Include="Assets\Scripts\Dog.cs" />
-     <Compile Include="Assets\Scripts\EditorPath.cs" />
-     <Compile Include="Assets\Scripts\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Debug\EditorPath.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Dog.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Guard.cs" />
+     <Compile Include="Assets\Scripts\Enemies\SpikeBall.cs" />
+     <Compile Include="Assets\Scripts\Game Control\CameraController.cs" />
      <Compile Include="Assets\Scripts\Game Control\ChooseScene.cs" />
+     <Compile Include="Assets\Scripts\Game Control\CinematicBars.cs" />
      <Compile Include="Assets\Scripts\Game Control\GameController.cs" />
      <Compile Include="Assets\Scripts\Game Control\UIController.cs" />
-     <Compile Include="Assets\Scripts\Guard.cs" />
-     <Compile Include="Assets\Scripts\Key.cs" />
-     <Compile Include="Assets\Scripts\LevelManager.cs" />
-     <Compile Include="Assets\Scripts\Levels.cs" />
-     <Compile Include="Assets\Scripts\LevelTrigger.cs" />
-     <Compile Include="Assets\Scripts\MovingPlatform.cs" />
+     <Compile Include="Assets\Scripts\Level Control\LevelManager.cs" />
+     <Compile Include="Assets\Scripts\Level Control\Levels.cs" />
+     <Compile Include="Assets\Scripts\Level Control\LevelTrigger.cs" />
+     <Compile Include="Assets\Scripts\Level Objects\Key.cs" />
+     <Compile Include="Assets\Scripts\Level Objects\MovingPlatform.cs" />
      <Compile Include="Assets\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Scripts\Player\PlayersFace.cs" />
-     <Compile Include="Assets\Scripts\Projectile.cs" />
-     <Compile Include="Assets\Scripts\ProjectilePool.cs" />
-     <Compile Include="Assets\Scripts\SpikeBall.cs" />
+     <Compile Include="Assets\Scripts\Weapon\Projectile.cs" />
+     <Compile Include="Assets\Scripts\Weapon\ProjectilePool.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

@@ -112,10 +112,10 @@ MonoBehaviour:
     y: 30
     width: 1440
     height: 738
-  m_MinSize: {x: 711, y: 494}
-  m_MaxSize: {x: 18006, y: 14044}
+  m_MinSize: {x: 713, y: 494}
+  m_MaxSize: {x: 18008, y: 14044}
   vertical: 0
-  controlID: 7106
+  controlID: 696
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,10 +137,10 @@ MonoBehaviour:
     y: 0
     width: 675
     height: 738
-  m_MinSize: {x: 202, y: 422}
-  m_MaxSize: {x: 4002, y: 8022}
+  m_MinSize: {x: 202, y: 444}
+  m_MaxSize: {x: 4002, y: 8044}
   vertical: 1
-  controlID: 6977
+  controlID: 697
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 494}
   m_MaxSize: {x: 10004, y: 14044}
   vertical: 1
-  controlID: 7070
+  controlID: 740
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -418,9 +418,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: 1.4115226, y: 2.107692, z: -7.0811167}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 1.4115226, y: 2.107692, z: -7.0811167}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -453,9 +453,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 22
+    m_Target: 26.03047
     speed: 2
-    m_Value: 22
+    m_Value: 26.03047
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 101096
+  m_LastSelectedObjectID: 65992
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -13271,6 +13271,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13279,6 +13280,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13346,6 +13348,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13354,6 +13357,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13421,6 +13425,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13429,6 +13434,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13496,6 +13502,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13504,6 +13511,84 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
+          - 2.0.1
+          - 2.0.2
+          - 2.0.4
+          m_Recommended: 
+        m_Dependencies: []
+        m_ResolvedDependencies: []
+        m_Keywords:
+        - TPD
+        - Tracked Pose Driver
+        - XR
+        - Input
+        - Helpers
+        m_Author:
+          m_Name: 
+          m_Email: 
+          m_Url: 
+        m_HasRegistry: 1
+        m_Registry:
+          m_Name: 
+          m_Url: https://packages.unity.com
+          m_IsDefault: 1
+    - Name: com.unity.xr.legacyinputhelpers
+      DisplayName: XR Legacy Input Helpers
+      _Version: 1.3.2
+      Description: This package includes the tracked pose driver for the legacy input
+        system, the XR Bindings Seeding Tool and 3Dof Arm Model support for the Tracked
+        Pose Driver. The Tracked Pose Driver is a monobehavior that enables GameObjects
+        to track input devices, the XR Bindings Seeding Tool adds a menu item under
+        the 'Assets' menu which populates the Input Asset with Unity's crossplatform
+        Input Bindings
+      Category: XR
+      State: 1
+      IsCurrent: 0
+      IsLatest: 0
+      Group: Packages
+      Type: 
+      Origin: 1
+      Errors: []
+      IsVerified: 0
+      Author: Unity Technologies Inc.
+      Samples: []
+      HasFullFetch: 0
+      Info:
+        m_PackageId: com.unity.xr.legacyinputhelpers@2.0.2
+        m_IsRootDependency: 1
+        m_Version: 2.0.2
+        m_Source: 1
+        m_ResolvedPath: /Users/JoeDavis/Documents/Unity Projects/Doodle/Library/PackageCache/com.unity.xr.legacyinputhelpers@2.0.2
+        m_AssetPath: Packages/com.unity.xr.legacyinputhelpers
+        m_Name: com.unity.xr.legacyinputhelpers
+        m_DisplayName: XR Legacy Input Helpers
+        m_Category: XR
+        m_Type: 
+        m_Description: This package includes the tracked pose driver for the legacy
+          input system, the XR Bindings Seeding Tool and 3Dof Arm Model support for
+          the Tracked Pose Driver. The Tracked Pose Driver is a monobehavior that
+          enables GameObjects to track input devices, the XR Bindings Seeding Tool
+          adds a menu item under the 'Assets' menu which populates the Input Asset
+          with Unity's crossplatform Input Bindings
+        m_Status: 4
+        m_Errors: []
+        m_Versions:
+          m_All:
+          - 1.0.0
+          - 1.0.2
+          - 1.0.3
+          - 1.3.1
+          - 1.3.2
+          - 2.0.1
+          - 2.0.2
+          - 2.0.4
+          m_Compatible:
+          - 1.0.0
+          - 1.0.2
+          - 1.0.3
+          - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13571,6 +13656,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13579,6 +13665,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13646,6 +13733,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13654,6 +13742,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13721,6 +13810,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -13729,6 +13819,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28029,6 +28120,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28037,6 +28129,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28104,6 +28197,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28112,6 +28206,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28179,6 +28274,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28187,6 +28283,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28254,6 +28351,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28262,6 +28360,84 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
+          - 2.0.1
+          - 2.0.2
+          - 2.0.4
+          m_Recommended: 
+        m_Dependencies: []
+        m_ResolvedDependencies: []
+        m_Keywords:
+        - TPD
+        - Tracked Pose Driver
+        - XR
+        - Input
+        - Helpers
+        m_Author:
+          m_Name: 
+          m_Email: 
+          m_Url: 
+        m_HasRegistry: 1
+        m_Registry:
+          m_Name: 
+          m_Url: https://packages.unity.com
+          m_IsDefault: 1
+    - Name: com.unity.xr.legacyinputhelpers
+      DisplayName: XR Legacy Input Helpers
+      _Version: 1.3.2
+      Description: This package includes the tracked pose driver for the legacy input
+        system, the XR Bindings Seeding Tool and 3Dof Arm Model support for the Tracked
+        Pose Driver. The Tracked Pose Driver is a monobehavior that enables GameObjects
+        to track input devices, the XR Bindings Seeding Tool adds a menu item under
+        the 'Assets' menu which populates the Input Asset with Unity's crossplatform
+        Input Bindings
+      Category: XR
+      State: 1
+      IsCurrent: 0
+      IsLatest: 0
+      Group: Packages
+      Type: 
+      Origin: 1
+      Errors: []
+      IsVerified: 0
+      Author: Unity Technologies Inc.
+      Samples: []
+      HasFullFetch: 0
+      Info:
+        m_PackageId: com.unity.xr.legacyinputhelpers@2.0.2
+        m_IsRootDependency: 1
+        m_Version: 2.0.2
+        m_Source: 1
+        m_ResolvedPath: /Users/JoeDavis/Documents/Unity Projects/Doodle/Library/PackageCache/com.unity.xr.legacyinputhelpers@2.0.2
+        m_AssetPath: Packages/com.unity.xr.legacyinputhelpers
+        m_Name: com.unity.xr.legacyinputhelpers
+        m_DisplayName: XR Legacy Input Helpers
+        m_Category: XR
+        m_Type: 
+        m_Description: This package includes the tracked pose driver for the legacy
+          input system, the XR Bindings Seeding Tool and 3Dof Arm Model support for
+          the Tracked Pose Driver. The Tracked Pose Driver is a monobehavior that
+          enables GameObjects to track input devices, the XR Bindings Seeding Tool
+          adds a menu item under the 'Assets' menu which populates the Input Asset
+          with Unity's crossplatform Input Bindings
+        m_Status: 4
+        m_Errors: []
+        m_Versions:
+          m_All:
+          - 1.0.0
+          - 1.0.2
+          - 1.0.3
+          - 1.3.1
+          - 1.3.2
+          - 2.0.1
+          - 2.0.2
+          - 2.0.4
+          m_Compatible:
+          - 1.0.0
+          - 1.0.2
+          - 1.0.3
+          - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28329,6 +28505,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28337,6 +28514,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28404,6 +28582,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28412,6 +28591,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28479,6 +28659,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -28487,6 +28668,7 @@ MonoBehaviour:
           - 1.0.2
           - 1.0.3
           - 1.3.1
+          - 1.3.2
           - 2.0.1
           - 2.0.2
           - 2.0.4
@@ -86827,10 +87009,10 @@ MonoBehaviour:
           m_Name: 
           m_Url: https://packages.unity.com
           m_IsDefault: 1
-    listPackagesVersion: 13
-    listPackagesOfflineVersion: 12
+    listPackagesVersion: 32
+    listPackagesOfflineVersion: 32
     searchOperationOngoing: 1
-    listOperationOngoing: 0
+    listOperationOngoing: 1
     listOperationOfflineOngoing: 0
   SearchFilter:
     SearchText: 
@@ -86978,9 +87160,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 6e350000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6cbfffff9abfffff9cbfffffa0bfffffa4bfffffa8bfffff8ec0ffffbac0ffffa0c1ffffa4c1ffffa8c1ffffb6c1ffff4ec6ffff7ac6ffff60c7ffff64c7ffff68c7ffff76c7ffff26d2ffff52d2ffff38d3ffff3cd3ffff40d3ffff4ed3ffffacd7ffffdcd7ffffded7ffffe2d7ffffe6d7ffffead7ffffdcd8ffff1ad9ffff52d9ffff3adaffff6adaffff6cdaffff70daffff74daffff78daffff0edbffff3edbffff40dbffff44dbffff48dbffff4cdbffff44dcffff18ddffff42ddffffbeddffffeeddfffff0ddfffff4ddfffff8ddfffffcddffff92deffffc2deffffa8dfffffacdfffffb0dfffffc2dfffff68e3ffff9ae3ffff9ce3ffffa0e3ffffa4e3ffffa8e3ffff1ce5ffff4ce5ffff32e6ffff36e6ffff3ae6ffff4ce6ffff6cf0ffffa2f0ffffe0f0ffff24f3ffff52f3ffff3cf4ffff44f4ffff78f4ffff84f4ffff48f5ffff7cf5ffffaef5ffffe6f5ffff58faffffd25d000070e30000d8e700009c160100fa3d0100a43e0100b05b0100ba5c01006a5e01000c600100228c0100
+      m_ExpandedIDs: 04efffff8efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -87098,7 +87280,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/Data
+    - Assets/Scenes
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
@@ -87110,7 +87292,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 0e280000
     m_LastClickedID: 10254
-    m_ExpandedIDs: ffffffff000000009234000038360000
+    m_ExpandedIDs: ffffffff00000000e02a0000a02c0000702e0000a62e0000c0370000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -87135,10 +87317,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 22.000122}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff000000009234000036360000cc380000
+    m_ExpandedIDs: ffffffff00000000e02a0000a62e0000c0370000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

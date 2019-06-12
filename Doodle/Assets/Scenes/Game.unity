@@ -586,7 +586,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -2530,7 +2532,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -5354,6 +5358,133 @@ Transform:
   m_Father: {fileID: 1004295121}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &604093485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 604093486}
+  - component: {fileID: 604093487}
+  m_Layer: 0
+  m_Name: pop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &604093486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604093485}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 654278997}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &604093487
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604093485}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4e8b7fda1f75c4e6c8fcfd2779f1afc8, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &606203788
 GameObject:
   m_ObjectHideFlags: 0
@@ -5619,7 +5750,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Freedom!
+  m_Text: You have escaped!
 --- !u!222 &634929114
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5711,6 +5842,7 @@ Transform:
   - {fileID: 1312594371}
   - {fileID: 2146752590}
   - {fileID: 2143713766}
+  - {fileID: 604093486}
   m_Father: {fileID: 0}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6867,7 +6999,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -7038,7 +7172,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Congratulations, you have escaped!
+  m_Text: You are now free to go live your life.
 --- !u!222 &757583806
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7117,7 +7251,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -9465,7 +9601,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -10031,7 +10169,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -11008,7 +11148,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1146096598}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: d3b84283dca8645bd871f5236e1090f3, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 32251cd02daec46ae8c5cce1cc4df3cc, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 528201281}
@@ -11021,12 +11161,14 @@ VideoPlayer:
   m_DataSource: 0
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
   m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
@@ -12989,7 +13131,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -13162,7 +13306,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -13412,7 +13558,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -13984,13 +14132,6 @@ MonoBehaviour:
   dogLeft: {fileID: 3680313714748964166, guid: 029172ac92bd14db79d046a4fdde5e65, type: 3}
   dogRight: {fileID: 8643992128533239375, guid: 15a23dc38ed294307b0662ca3ffefc3a,
     type: 3}
-  levelMusic:
-  - {fileID: 824436899}
-  - {fileID: 599388056}
-  - {fileID: 128351342}
-  - {fileID: 666562215}
-  - {fileID: 1312594372}
-  - {fileID: 2146752591}
   levelOneSpawnPoints:
   - guardSpawnPoints:
     - {fileID: 1997108599}
@@ -14041,6 +14182,13 @@ MonoBehaviour:
   - {fileID: 725156905}
   - {fileID: 1947617239}
   - {fileID: 1113191527}
+  levelMusic:
+  - {fileID: 824436899}
+  - {fileID: 599388056}
+  - {fileID: 128351342}
+  - {fileID: 666562215}
+  - {fileID: 1312594372}
+  - {fileID: 2146752591}
 --- !u!114 &1517633818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14054,6 +14202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IntroCutscene: {fileID: 0}
+  menuMusic: {fileID: 0}
   Menu: {fileID: 0}
   gameScene: Game
   rulesScene: How To Play
@@ -14938,7 +15087,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -16310,7 +16461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1789105772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16326,7 +16477,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -16561,7 +16714,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -17328,7 +17483,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -29634,7 +29791,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -30432,7 +30591,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4a024bfabd32249f9ad045cfd2196064, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -30559,7 +30718,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 00aebe41e2b514e92ae7088e119258b0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0
