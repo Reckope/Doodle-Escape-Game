@@ -4,7 +4,7 @@
 * Hardware: 2012 15" Macbook Pro Retina Display.
 * Software: Unity
 * Platform: PC / Mac
-* Development - In Progress
+* Development - Complete
 
 If you're reviewing the project to provide feedback, please navigate to the following directories / links:
 
