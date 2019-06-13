@@ -1,13 +1,23 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape.
+ * 2019
+ * Notes:
+ * Attach this to the Key gameobject. 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Key : MonoBehaviour {
 
+	// Components
 	Collider2D Collider2D;
+
+	// Global Variables
 	private string keyColour;
 
-	// Use this for initialization
+	// ---------------------------------------------------------------------------------
 	void Start () {
 		keyColour = this.gameObject.tag;
 		Collider2D = GetComponent<Collider2D>();

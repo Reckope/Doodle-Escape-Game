@@ -1,6 +1,6 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape
- * Code QA Sweep: DONE - 10/06/19
+ * 2019
  * Notes:
  * This is an intermediary script. This controls the main flow of the game, and
  * contains the key methods that other classes can call / pass params through. 
@@ -16,15 +16,18 @@ public class GameController : MonoBehaviour {
 	//Static instance of GameController which allows it to be accessed by any other script.
 	public static GameController instance;
 
-	// Scripts
+	// Secondary manager Scripts
 	LevelManager LevelManager;
 	UIController UIController;
 	CameraController CameraController;
 	CinematicBars CinematicBars;
 	Player Player;
 
-	// GameObjects & components
+	// Components
 	public VideoPlayer endCutscene;
+	public AudioSource keyCollect;
+
+	// GameObjects
 	public GameObject[] keys;
 	public Transform[] spawnPoints;
 	private GameObject key;
@@ -34,7 +37,6 @@ public class GameController : MonoBehaviour {
 	const int FINISHED_LEVEL_VALUE = -1;
 	const int END_TRANSITION_POINT = -15;
 	public int numberOfKeysRemaining;
-	public bool escaping;
 	public bool inTransition;
 
 	// ---------------------------------------------------------------------------------
@@ -50,7 +52,6 @@ public class GameController : MonoBehaviour {
 		Player = GameObject.FindObjectOfType(typeof(Player)) as Player;
 		GameSettings();
 		SpawnKeys();
-		escaping = false;
 		inTransition = false;
 	}
 	
@@ -63,7 +64,7 @@ public class GameController : MonoBehaviour {
 
 	// Instance / target framerate.
 	private void GameSettings(){
-		// Target frame rate is 60 fps
+		// Target frame rate is 30 fps
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = 300;
 		// Singleton Pattern: There can only ever be one instance of a GameController.
@@ -77,15 +78,16 @@ public class GameController : MonoBehaviour {
 
 	private void SpawnKeys(){
 		numberOfKeysRemaining = 0;
-        for(int x = 0; x < keys.Length; x++){
-            key = (GameObject)Instantiate (keys[x], spawnPoints[x].position, Quaternion.identity);
-            GameController.instance.numberOfKeysRemaining++;
-        }
-    }
+		for(int x = 0; x < keys.Length; x++){
+			key = (GameObject)Instantiate (keys[x], spawnPoints[x].position, Quaternion.identity);
+			GameController.instance.numberOfKeysRemaining++;
+		}
+	}
 
 	// When the player collects a key, warp the key to it's allocated lock
 	// and decrement the total remaining by 1. 
 	public void CollectedKey(string keyColour){
+		keyCollect.Play();
 		numberOfKeysRemaining--;
 		WarpKeyToLock(keyColour);
 		LevelManager.CompletedLevel(LevelManager.currentLevel);
@@ -125,7 +127,6 @@ public class GameController : MonoBehaviour {
 
 	public bool GameOver(int causeOfDeath){
 		UIController.DisplayGameOverUI(causeOfDeath);
-		// sad music
 		return true;
 	}
 
@@ -175,7 +176,6 @@ public class GameController : MonoBehaviour {
 	// When escaping, perform various actions before, during and after the
 	// transition down to the lower gound. 
 	public void StartTransition(){
-		escaping = true;
 		inTransition = true;
 	}
 
@@ -190,14 +190,14 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void EndTransition(){
-		Debug.Log("END");
+		//Debug.Log("TRANSITION END");
 		inTransition = false;
 		Player.PlayerEndTransition();
 		CinematicBars.HideCinematicBars();
 	}
 
 	// Once the player reaches the escape trigger, play the final cutscene
-	// and end the game. 
+	// to end the game. 
 	public void PlayFinalCutscene(){
 		UIController.HideAllUI();
 		Player.PlayerCompleteGame();

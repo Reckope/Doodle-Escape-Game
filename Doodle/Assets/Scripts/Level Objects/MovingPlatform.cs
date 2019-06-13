@@ -1,14 +1,21 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape.
+ * 2019
+ * Notes:
+ * Attach this to the moving platform gameobject. 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour {
 
-	// Scripts and components
-	public EditorPath pathToFollow;
+	// Classes
 	Player PlayerScript;
 
 	// GameObjects
+	public EditorPath pathToFollow;
 	Vector2 lastPosition;
 	Vector2 currentPosition;
 	private GameObject player;
@@ -20,7 +27,7 @@ public class MovingPlatform : MonoBehaviour {
 	private float reachDistance;
 	private bool playerOnPlatform;
 
-	// Use this for initialization
+	// ---------------------------------------------------------------------------------
 	void Start () {
 		PlayerScript = GameObject.FindObjectOfType(typeof(Player)) as Player;
 		lastPosition = transform.position;
@@ -52,6 +59,9 @@ public class MovingPlatform : MonoBehaviour {
 			PlayerScript.PlayerMoveWithPlatform(this.gameObject, offset);
 		}
 	}
+
+	// ---------- Triggers ----------
+
 	// When a player lands on me, I move!
 	private void OnTriggerEnter2D(Collider2D col){
 		if (col.gameObject.tag == ("Player")) {

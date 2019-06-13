@@ -1,6 +1,6 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape.
- * Code QA Sweep: DONE - 08/06/19
+ * 2019
  * Notes:
  * Attach this to the Guard object to set / manage its relevant tasks.  
  */
@@ -53,11 +53,11 @@ public class Dog : Enemy {
     private void SetTasks(){
         switch(primaryTask){
             case EnemyPrimaryTask.asleep:
-            // Play snoring sound
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
             break;
             case EnemyPrimaryTask.attack:
             rb2d.constraints = RigidbodyConstraints2D.None;
+            PlayEnemySound(dogAlert);
             anim.SetTrigger("DogAwake");
             MoveTowardsPlayer();
             Attack();
@@ -85,14 +85,14 @@ public class Dog : Enemy {
 
     // ---------- Triggers ----------
 
-    private void OnTriggerEnter2D (Collider2D collide){
-        if(collide.gameObject.layer == LayerMask.NameToLayer("Projectile") && health > MIN_HEALTH){
+    private void OnTriggerEnter2D (Collider2D col){
+        if(col.gameObject.layer == LayerMask.NameToLayer("Projectile") && health > MIN_HEALTH){
             TakeDamage(sprite);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collide){
-        if(collide.gameObject.layer == LayerMask.NameToLayer("Lava")){
+    private void OnCollisionEnter2D(Collision2D col){
+        if(col.gameObject.layer == LayerMask.NameToLayer("Lava")){
             Die();
         }
     }

@@ -1,6 +1,6 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape
- * Code QA Sweep: DONE - 10/06/19
+ * 2019
  * Notes:
  * This is used to control all of the camera movements. 
  */
@@ -36,8 +36,8 @@ public class CameraController : MonoBehaviour {
 		Camera = GetComponent<Camera>();
 		cameraMaxYBounds = 13.6f;
 		cameraMinYBounds = -13.6f;
-		cameraMinXBounds = -22.7f;
-		cameraMaxXBounds = 22.7f;
+		cameraMinXBounds = -23.1f;
+		cameraMaxXBounds = 23.1f;
 		cameraDistanceAheadOfPlayer = 0;
 	}
 	
@@ -51,21 +51,29 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 
-	// Constantly follow the player throughout the game, whilst stopping when reaching
+	// Constantly follow the player throughout the game, then stop when reaching
 	// the edge of the game world. 
 	private void FollowPlayer(){
+		// Set position
 		Vector3 point = Camera.WorldToViewportPoint(player.position);
 		Vector3 delta = player.position - Camera.ViewportToWorldPoint(new Vector3(CAMERA_DELTA_X_POSITION, CAMERA_DELTA_Y_POSITION, point.z));
 		Vector3 destination = transform.position + delta;
+		// Set Bounds
 		destination.x = Mathf.Clamp (destination.x + cameraDistanceAheadOfPlayer, cameraMinXBounds, cameraMaxXBounds);
 		destination.y = Mathf.Clamp (destination.y + CAMERA_DISTANCE_ABOVE_PLAYER, cameraMinYBounds, cameraMaxYBounds);
+		// Follow
 		transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, FOLLOW_PLAYER_DAMP_TIME);
 	}
 
 	// When the player is escaping, move the camera downwards and change it's 
 	// min / max bounds. 
 	public void CameraEscapeTransition(){
-		transform.position = Vector3.Lerp(transform.position, targetPoint.position, Time.deltaTime);
+		if(targetPoint != null){
+			transform.position = Vector3.Lerp(transform.position, targetPoint.position, Time.deltaTime);
+		}
+		else{
+			Debug.Log("ERROR: CANT FIND TARGET POINT");
+		}
 		cameraMinYBounds = -25f;
 		cameraMinXBounds = 0f;
 		cameraMaxYBounds = -25f;

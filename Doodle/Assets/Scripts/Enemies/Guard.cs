@@ -1,6 +1,6 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape.
- * Code QA Sweep: DONE - 08/06/19
+ * 2019
  * Notes:
  * Attach this to the Guard object to set / manage its relevant tasks.  
  */
@@ -63,6 +63,7 @@ public class Guard : Enemy{
             Patrol();
             break;
             case EnemyPrimaryTask.attack:
+            PlayEnemySound(guardAlert);
             MoveTowardsPlayer();
             Attack();
             MoveEnemy(direction, acceleration);
@@ -129,7 +130,6 @@ public class Guard : Enemy{
     // ---------- Triggers ----------
 
     private void OnTriggerEnter2D (Collider2D collide){
-        // If the enemy gets hit by a projectile...
         if(collide.gameObject.layer == LayerMask.NameToLayer("Projectile") && health > MIN_HEALTH){
             TakeDamage(sprite);
         }

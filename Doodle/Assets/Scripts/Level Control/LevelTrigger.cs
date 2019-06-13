@@ -1,12 +1,21 @@
-﻿using System;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape.
+ * 2019
+ * Notes:
+ * This is used to see what level is triggered by the player. 
+ */
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelTrigger : MonoBehaviour{
 
+    // Classes
     LevelManager LevelManager;
 
+    // Global variables.
     private int levelActivated;
     const int ESCAPED_LEVEL = 5;
 

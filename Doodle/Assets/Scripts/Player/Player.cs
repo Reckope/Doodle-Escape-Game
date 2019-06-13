@@ -1,6 +1,8 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape.
- * Code QA Sweep: DONE - 31/05/19
+ * 2019
+ * Notes:
+ * Attach this to the player gameobject. 
  */
 
 using System.Collections;
@@ -9,7 +11,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-	// Scripts
+	// Classes
 	ProjectilePool ProjectilePool;
 	
 	// Components
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour {
 
 	// Global Variables
 	const int SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER = 1;
+	const int IDLE_VALUE = 0;
 	public static bool isDead;
 	public enum PlayerShootDir {left, notShooting, right};
 	public enum PlayerMoveDir {left, idle, right};
@@ -29,9 +32,9 @@ public class Player : MonoBehaviour {
 	private float jumpForce, acceleration, maxSpeed, groundCheckRadius;
 	private float nextFire, fireRate;
 
+	// Objects
 	public PlayerShootDir shooting;
 	public PlayerMoveDir moving;
-
 
 	// ---------------------------------------------------------------------------------
 	void Start () {
@@ -39,7 +42,7 @@ public class Player : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D>();
 		ProjectilePool = GetComponent<ProjectilePool>();
 		nextFire = 0.0f;
-		fireRate = 0.15f;
+		fireRate = 0.14f;
 		isDead = false;
 		Collider2D.enabled = true;
 		rb2d.constraints = RigidbodyConstraints2D.None;
@@ -61,26 +64,30 @@ public class Player : MonoBehaviour {
 		bool jump;
 		bool grounded;
 		float moveHorizontal;
+		float airDrag = 3f;
 
 		// Move the main character.
 		rb2d.bodyType = RigidbodyType2D.Dynamic;
 		grounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, whatIsGround);
 		moveHorizontal = Input.GetAxisRaw("Horizontal");
-		Vector2 movement = new Vector2 (moveHorizontal, 0);
+		Vector2 movement = new Vector2 (moveHorizontal, IDLE_VALUE);
 		if((rb2d.velocity.x >= -maxSpeed && rb2d.velocity.x <= maxSpeed && grounded)){
 			rb2d.AddForce(movement * acceleration);
 		}
 		else if(!grounded){
-			rb2d.AddForce(movement * (acceleration / 2.5f));
-			if(rb2d.velocity.x < -maxSpeed || rb2d.velocity.x > maxSpeed){
-				rb2d.AddForce(-movement * acceleration);
+			if((rb2d.velocity.x < -maxSpeed || rb2d.velocity.x > maxSpeed)){
+				airDrag = 15f;
 			}
+			else{
+				airDrag = 3f;
+			}
+			rb2d.AddForce(movement * (acceleration / airDrag));
 		}
 
-		if(moveHorizontal < 0){
+		if(moveHorizontal < IDLE_VALUE){
 			moving = PlayerMoveDir.left;
 		}
-		else if(moveHorizontal > 0){
+		else if(moveHorizontal > IDLE_VALUE){
 			moving = PlayerMoveDir.right;
 		}
 		else{
@@ -89,10 +96,10 @@ public class Player : MonoBehaviour {
 
 		// Jump around.
 		jump = Input.GetKeyDown(KeyCode.W);
-		if(jump && grounded){
-			//if(grounded){
+		if(jump){
+			if(grounded){
 				rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-			//}
+			}
 		}
 		//Debug.Log("velocity: " + rb2d.velocity.x);
 	}
@@ -103,10 +110,10 @@ public class Player : MonoBehaviour {
 
 		shoot = Input.GetAxisRaw("Shoot");
 		if(Time.time > nextFire){
-			if(shoot < 0){
+			if(shoot < IDLE_VALUE){
 				shooting = PlayerShootDir.left;
 			}
-			else if(shoot > 0){
+			else if(shoot > IDLE_VALUE){
 				shooting = PlayerShootDir.right;
 			}
 			else{
@@ -124,15 +131,17 @@ public class Player : MonoBehaviour {
 	private void SpawnProjectile(){
 		float spawnProjectileLeft = (this.gameObject.transform.position.x - SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER);
 		float spawnProjectileRight = (this.gameObject.transform.position.x + SPAWN_PROJECTILE_DISTANCE_AWAY_FROM_PLAYER);
+		float spawnProjectile = 0;
 
 		GameObject projectile = ProjectilePool.GetPooledProjectile();
 		if (projectile != null){
 			if(shooting == PlayerShootDir.left){
-				projectile.transform.position = new Vector2(spawnProjectileLeft, this.gameObject.transform.position.y);
+				spawnProjectile = spawnProjectileLeft;
 			}
 			else if(shooting == PlayerShootDir.right){
-				projectile.transform.position = new Vector2(spawnProjectileRight, this.gameObject.transform.position.y);
+				spawnProjectile = spawnProjectileRight;
 			}
+			projectile.transform.position = new Vector2(spawnProjectile, this.gameObject.transform.position.y);
 			projectile.SetActive(true);
 		}
 	}
@@ -143,23 +152,23 @@ public class Player : MonoBehaviour {
 		transform.position = platformName.transform.position + offset;
 	}
 
-	private void PlayerDie(int causeOfDeath){
-		// anim.SetTrigger(causeOfDeath);
-		// sound.Play(causeOfDeath);
+	private void PlayerDie(){
 		Collider2D.enabled = false;
 		rb2d.constraints = RigidbodyConstraints2D.FreezeAll;
 		isDead = true;
 	}
 
+	// Float down whilst in transition. 
 	public void PlayerEscapeTransition(){
 		float transitionDirection = -1f;
 		float transitionSpeed = 4.5f;
+		int noChangeInPosition = 0;
 		var rotation = transform.rotation.eulerAngles;
 		rotation.z = 0;
 
 		rb2d.bodyType = RigidbodyType2D.Static;
 		transform.rotation = Quaternion.Euler(rotation);
-		transform.Translate(0, transitionDirection * transitionSpeed * Time.deltaTime * 1, 0);
+		transform.Translate(noChangeInPosition, transitionDirection * transitionSpeed * Time.deltaTime, noChangeInPosition);
 	}
 
 	public void PlayerEndTransition(){
@@ -179,7 +188,7 @@ public class Player : MonoBehaviour {
 		// Select cause of death once the enemy hits me.
 		if(Col.gameObject.tag == ("Enemy")){
 			causeOfDeath = GameController.instance.FindDeathReason(Col);
-			PlayerDie(causeOfDeath);
+			PlayerDie();
 			//Debug.Log("CAUSE OF DEATH: " + causeOfDeath);
 			GameController.instance.GameOver(causeOfDeath);
 		}

@@ -1,7 +1,9 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape.
+ * 2019
  * Notes:
- * Don't use Coroutine as apparently it'll make it hard to track issue in a large project. 
+ * This is used to control the UI within the game. 
+ * Don't use Coroutine as apparently it'll make it hard to track issues in a large project.
  */
 
 using System;
@@ -11,6 +13,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Structure for the death message. 
 [Serializable]
 public struct DeathMessageString{
     public int id;
@@ -18,6 +21,7 @@ public struct DeathMessageString{
     public string deathMessage;
 }
 
+// The array of death message strings. 
 [Serializable]
 public class DeathStringDataCollection {
     public DeathMessageString[] causeOfDeathStrings;
@@ -92,7 +96,8 @@ public class UIController : MonoBehaviour{
         helpTextTimer = 0;
     }
 
-    // ----- Fade effects and display times for the objective and help text -----
+    // ---------- Fade effects for the objective and help text ----------
+
     private void ObjectiveTextDisplayTime(){
         if(objectiveTextIsActive && objectiveTextTimer <= OBJECTIVE_TEXT_DISPLAY_TIME){
             objectiveTextTimer += Time.deltaTime;
@@ -149,6 +154,7 @@ public class UIController : MonoBehaviour{
         }
     }
 
+    // Load the strings and return what message is needed. 
     private string LoadDeathStrings(int causeOfDeath){
         int id, stringArrayValue = 9;
         string name, deathMessage;

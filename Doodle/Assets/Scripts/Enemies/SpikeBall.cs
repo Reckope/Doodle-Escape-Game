@@ -1,21 +1,30 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape.
+ * 2019
+ * Notes:
+ * Attach this to the SpikeBall object to set it's speed / tasks. .  
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpikeBall : MonoBehaviour {
 
+	// Global Variables
 	[SerializeField]
 	private float rotationSpeed;
+	private float stationary = 0;
 
-	// Use this for initialization
+	// ---------------------------------------------------------------------------------
 	void Start () {
-		if (rotationSpeed == 0f){
+		if (rotationSpeed == stationary){
 			rotationSpeed = 2f;
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate(0, 0, rotationSpeed);
+		transform.Rotate(stationary, stationary, rotationSpeed);
 	}
 }

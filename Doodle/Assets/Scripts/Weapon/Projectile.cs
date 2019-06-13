@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape.
+ * 2019
+ * Notes:
+ * Attach this to the projectile gameobject. 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,15 +16,16 @@ public class Projectile : MonoBehaviour {
 	GameObject ground;
 
 	// Global Variables
+	const int NO_CHANGE_IN_DIRECTION = 0;
 	private float direction;
 	private float speed;
 	private float moveXPosition;
 
-	// Use this for initialization
+	// ---------------------------------------------------------------------------------
 	void Start () {
 		player = GameObject.FindWithTag ("Player");
 		ground = GameObject.FindWithTag ("Ground");
-		speed = 15f;
+		speed = 17f;
 	}
 	
 	// Update is called once per frame
@@ -31,7 +39,7 @@ public class Projectile : MonoBehaviour {
 				direction = 1;
 			}
 			moveXPosition = direction * speed * Time.deltaTime;
-			transform.Translate(moveXPosition, 0, 0);
+			transform.Translate(moveXPosition, NO_CHANGE_IN_DIRECTION, NO_CHANGE_IN_DIRECTION);
 		}
 	}
 

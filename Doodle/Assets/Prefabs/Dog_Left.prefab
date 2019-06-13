@@ -137,8 +137,12 @@ MonoBehaviour:
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
   dieSound: {fileID: 0}
+  guardAlert: {fileID: 0}
+  dogAlert: {fileID: 0}
   player: {fileID: 0}
   enemyDeathSound: {fileID: 0}
+  guardAlertSound: {fileID: 0}
+  dogAlertSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -153,7 +157,7 @@ MonoBehaviour:
   spriteAlpha: 1
   maxSpeed: 30
   face: {fileID: 3680313716633438390}
-  acceleration: 110
+  acceleration: 80
 --- !u!95 &3680313714748964029
 Animator:
   serializedVersion: 3

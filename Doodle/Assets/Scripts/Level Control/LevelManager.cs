@@ -1,7 +1,7 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape.
  * References: [1]
- * Code QA Sweep: DONE - 31/05/19
+ * 2019
  * Notes:
  * This is a intermediary script, used to read and manage the level data. 
  */
@@ -12,7 +12,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Structure for the level.
+// Structure of a level.
 [Serializable]
 public struct Level{
     public string id;
@@ -114,7 +114,7 @@ public class LevelManager : MonoBehaviour{
         objective = allLevels.levels[levelActivated].objective;
         buildIndex = allLevels.levels[levelActivated].buildIndex;
         allLevels.levels[levelActivated].isActive = isActive;
-        Debug.Log("Level: " + levelActivated + " is active: " + isActive);
+        //Debug.Log("Level: " + levelActivated + " is active: " + isActive);
         
         Levels.LaunchLevel(id, name, objective, buildIndex, isActive);
     }
@@ -131,7 +131,7 @@ public class LevelManager : MonoBehaviour{
     }
 
     // Once the player has collected a key, the game controller tells the level manager the level is complete. 
-    // This can be any key collected, and any method can simply call this to complete the level it tells it to. 
+    // This can be any key collected, and any method can simply call this to complete the level. 
     public void CompletedLevel(int levelID){
         DisableLevelBlockers();
         UIController.HideObjectiveText();
@@ -145,8 +145,8 @@ public class LevelManager : MonoBehaviour{
     public void UpdateLevelData(int levelID){
         allLevels.levels[levelID].isActive = false;
         allLevels.levels[levelID].completed = true;
-        Debug.Log("Level: " + levelID + " is active: " + allLevels.levels[levelID].isActive);
-        Debug.Log("Level " + levelID + " is completed: " + allLevels.levels[levelID].completed);
+        //Debug.Log("Level: " + levelID + " is active: " + allLevels.levels[levelID].isActive);
+        //Debug.Log("Level " + levelID + " is completed: " + allLevels.levels[levelID].completed);
         currentLevel = NOT_ON_LEVEL_BUILD_INDEX;
     }
 

@@ -1,6 +1,10 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape.
- * Code QA Sweep: DONE - 31/05/19
+ * 2019
+ * Notes:
+ * This is used to control the animations you see on the player. 
+ * Since the face & arms need to remain stationary while the body moves, a 
+ * seperate script was created for this. 
  */
 
 using System.Collections;
@@ -9,7 +13,7 @@ using UnityEngine;
 
 public class PlayersFace : MonoBehaviour {
 
-	// Scripts
+	// Classes
 	public Player player;
 
 	// GameObjects

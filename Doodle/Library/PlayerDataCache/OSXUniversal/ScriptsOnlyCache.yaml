@@ -976,7 +976,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAsset
   - hash:
       serializedVersion: 2
-      Hash: 108931f6643e23b3ea919a477b68e3a9
+      Hash: 4c9502b6a65d7a1df852bc35e48a411b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Guard
@@ -1072,7 +1072,7 @@ ScriptsOnlyBuild:
     className: Player
   - hash:
       serializedVersion: 2
-      Hash: f0efddc93c510165bddbfb7268ed0738
+      Hash: 7c81a961b13ac903ab89991e625ca34f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Dog
@@ -1162,7 +1162,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 5a0530cd33362218d097f14b6d05abc3
+      Hash: b54507e5a724bc7cfb25fc8dc20fb483
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameController
@@ -1286,4 +1286,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Game.unity
   - Assets/Scenes/How To Play.unity
   - Assets/Scenes/Credits.unity
-  playerPath: /Users/JoeDavis/Documents/Unity Projects/Doodle build v6.1.app
+  playerPath: /Users/JoeDavis/Documents/Unity Projects/Doodle build v7.0.app

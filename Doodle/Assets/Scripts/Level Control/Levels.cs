@@ -1,7 +1,7 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape.
  * References: [2]
- * Code QA Sweep: DONE - 10/06/19
+ * 2019
  * Notes:
  * This is used to control what happens within each level, as
  * well as invoking them. 
@@ -53,9 +53,10 @@ public class Levels : MonoBehaviour{
     }
 
     void Update(){
-        if(Input.GetKeyDown("space")){
-            LaunchLevel("LevelFive", "f", "escape", 5, true);
-        }
+        // Debug to unlock door:
+        //if(Input.GetKeyDown("space")){
+        //    LaunchLevel("LevelFive", "f", "escape", 5, true);
+        //}
     }
 
     // We get the level details from LevelManager.cs, and do whatever we want with the data.
@@ -70,12 +71,12 @@ public class Levels : MonoBehaviour{
         Invoke(id, 0f);
     }
 
-    // Using a jagged array, I am able to spawn different types of enemies into
+    // Using a jagged array, I am able to spawn the three different types of enemies into
     // the level that was triggered.
     // I tried to pass SpawnPoints.[enemy]SpawnPoints as a param to reduce code duplication,
     // but it wasn't working. 
     void SpawnEnemies(EnemySpawnPoints[] level){
-        Debug.Log("Activated: " + level);
+        //Debug.Log("Activated: " + level);
         for(int i = 0; i < level.Length; i++){
             for(int j = 0; j < level[i].guardSpawnPoints.Length; j++){
                 Instantiate(guard, new Vector3(level[i].guardSpawnPoints[j].transform.position.x, level[i].guardSpawnPoints[j].transform.position.y), Quaternion.identity);

@@ -1,11 +1,20 @@
-﻿using System.Collections;
+﻿/* Author: Joe Davis
+ * Project: Doodle Escape
+ * 2019
+ * Notes:
+ * This is used to see the path of which the platform follows.  
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EditorPath : MonoBehaviour {
 
-	// GameObjects & Components
+	// Components
 	public Color rayColor = Color.white;
+
+	// GameObjects
 	public List<Transform> pathObjs = new List<Transform>();
 	Transform[] objectChildren;
 

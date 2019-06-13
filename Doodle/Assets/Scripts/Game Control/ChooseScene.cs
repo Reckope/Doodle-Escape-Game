@@ -1,6 +1,7 @@
 ﻿/* Author: Joe Davis
  * Project: Doodle Escape
- * Date modified: 14/04/19
+ * 2019
+ * Notes:
  * This is used to switch between each scene.
  */
 
@@ -13,6 +14,7 @@ using UnityEngine.UI;
 
 public class ChooseScene : MonoBehaviour {
 
+	// Components
 	public VideoPlayer IntroCutscene;
 	public AudioSource menuMusic;
 	public GameObject Menu;
@@ -27,6 +29,8 @@ public class ChooseScene : MonoBehaviour {
 	[SerializeField]
 	private string mainMenuScene = "Main Menu";
 
+	// ---------------------------------------------------------------------------------
+	// Before starting the game, play the intro cutscene. 
 	public void PlayCutscene(){
 		menuMusic.Stop();
 		Menu.SetActive(false);

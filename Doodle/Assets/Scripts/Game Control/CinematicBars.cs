@@ -1,10 +1,9 @@
 ﻿/* Author: Joe Davis
- * Project: One Way Ticket to Hell
- * Date modified: 14/04/19
- * Reference: [3]
+ * Project: Doodle Escape
+ * 2019
+ * Notes:
  * Black bars are created via this script instead of using game objects. This
  * can be useful for future projects :) All you need to do is call ShowCinematicBars or HideCinematicBars.
- * Code QA Sweep: DONE.
  */
 
 using System.Collections;
@@ -16,12 +15,14 @@ public class CinematicBars : MonoBehaviour {
 
 	public RectTransform topBar, bottomBar;
     const float BLACK_BAR_SIZE = 250f;
+	const int ANCHOR_MIN = 0;
+	const int ANCHOR_MAX = 1;
 	private float changeSizeAmount;
 	private float targetSize;
 	private float barSpeed;
 	public bool isActive;
 
-	// Use this for initialization
+	// ---------------------------------------------------------------------------------
 	void Start () {
 		CreateBars();
 		barSpeed = 0.3f;
@@ -33,7 +34,7 @@ public class CinematicBars : MonoBehaviour {
             Debug.Log("CINEMA");
 			Vector2 sizeDelta = topBar.sizeDelta;
 			sizeDelta.y += changeSizeAmount * Time.deltaTime;
-			if(changeSizeAmount > 0){
+			if(changeSizeAmount > ANCHOR_MIN){
 				if(sizeDelta.y >= targetSize){
 					sizeDelta.y = targetSize;
 					isActive = false;
@@ -60,7 +61,7 @@ public class CinematicBars : MonoBehaviour {
 
 	// Hide the cinematic bars
 	public void HideCinematicBars(){
-		targetSize = 0f;
+		targetSize = ANCHOR_MIN;
 		changeSizeAmount = (targetSize - topBar.sizeDelta.y) / barSpeed;
 		isActive = true;
 	}
@@ -72,16 +73,16 @@ public class CinematicBars : MonoBehaviour {
 		barsObject.transform.SetParent(transform, false); // Scales the parent size in order to maintain this objects size.
 		barsObject.GetComponent<Image>().color = Color.black;
 		topBar = barsObject.GetComponent<RectTransform>();
-		topBar.anchorMin = new Vector2(0,1);
-		topBar.anchorMax = new Vector2(1,1);
-		topBar.sizeDelta = new Vector2(0,0);
+		topBar.anchorMin = new Vector2(ANCHOR_MIN, ANCHOR_MAX);
+		topBar.anchorMax = new Vector2(ANCHOR_MAX, ANCHOR_MAX);
+		topBar.sizeDelta = new Vector2(ANCHOR_MIN, ANCHOR_MIN);
 
 		barsObject = new GameObject("bottomBar", typeof(Image));
 		barsObject.transform.SetParent(transform, false);
 		barsObject.GetComponent<Image>().color = Color.black;
 		bottomBar = barsObject.GetComponent<RectTransform>();
-		bottomBar.anchorMin = new Vector2(0,0);
-		bottomBar.anchorMax = new Vector2(1,0);
-		bottomBar.sizeDelta = new Vector2(0,0);
+		bottomBar.anchorMin = new Vector2(ANCHOR_MIN, ANCHOR_MIN);
+		bottomBar.anchorMax = new Vector2(ANCHOR_MAX, ANCHOR_MIN);
+		bottomBar.sizeDelta = new Vector2(ANCHOR_MIN , ANCHOR_MIN);
 	}
 }
