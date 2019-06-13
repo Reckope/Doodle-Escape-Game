@@ -71,7 +71,7 @@ public class Player : MonoBehaviour {
 			rb2d.AddForce(movement * acceleration);
 		}
 		else if(!grounded){
-			rb2d.AddForce(movement * (acceleration / 3f));
+			rb2d.AddForce(movement * (acceleration / 2.5f));
 			if(rb2d.velocity.x < -maxSpeed || rb2d.velocity.x > maxSpeed){
 				rb2d.AddForce(-movement * acceleration);
 			}
@@ -88,11 +88,11 @@ public class Player : MonoBehaviour {
 		}
 
 		// Jump around.
-		jump = Input.GetKeyDown (KeyCode.W);
-		if(jump){
-			if(grounded){
+		jump = Input.GetKeyDown(KeyCode.W);
+		if(jump && grounded){
+			//if(grounded){
 				rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-			}
+			//}
 		}
 		//Debug.Log("velocity: " + rb2d.velocity.x);
 	}

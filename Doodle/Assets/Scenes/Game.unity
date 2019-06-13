@@ -8899,8 +8899,8 @@ MonoBehaviour:
     m_Bits: 256
   groundCheck: {fileID: 2008222482}
   jumpForce: 20
-  acceleration: 30
-  maxSpeed: 9
+  acceleration: 16
+  maxSpeed: 6
   groundCheckRadius: 0.2
   shooting: 0
   moving: 0

@@ -36,7 +36,7 @@ public abstract class Enemy : MonoBehaviour{
     public const int MIN_HEALTH = 0;
     public const int MOVE_RIGHT = 1;
     public const int MOVE_LEFT = -1;
-    public const int ALERTED_MAX_SPEED = 5;
+    public const float ALERTED_MAX_SPEED = 4.2f;
     public const int ENEMY_Y_POSITION = 0;
     public const float ENEMY_VISION_DISTANCE = 7.8f;
     public const float REDUCE_ENEMY_SPRITE_ALPHA = 0.1f;

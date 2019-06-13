@@ -64,8 +64,8 @@ public class GameController : MonoBehaviour {
 	// Instance / target framerate.
 	private void GameSettings(){
 		// Target frame rate is 60 fps
-		QualitySettings.vSyncCount = 1;
-		Application.targetFrameRate = 600;
+		QualitySettings.vSyncCount = 0;
+		Application.targetFrameRate = 300;
 		// Singleton Pattern: There can only ever be one instance of a GameController.
 		if (instance == null){
 			instance = this;

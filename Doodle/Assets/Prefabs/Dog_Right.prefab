@@ -136,7 +136,9 @@ MonoBehaviour:
   rb2d: {fileID: 0}
   spriteFace: {fileID: 0}
   sprite: {fileID: 0}
+  dieSound: {fileID: 0}
   player: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256
@@ -151,7 +153,7 @@ MonoBehaviour:
   spriteAlpha: 1
   maxSpeed: 30
   face: {fileID: 8643992128911940204}
-  acceleration: 130
+  acceleration: 110
 --- !u!95 &8643992128533239372
 Animator:
   serializedVersion: 3
