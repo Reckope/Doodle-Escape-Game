@@ -12,7 +12,7 @@ If you're reviewing the project to provide feedback, please navigate to the foll
 * Planning / Design - "Code Structure"
 * Gameplay Video - "https://www.youtube.com/watch?v=2xtKAzObWfk&t=86s"
 
-Summary: 'Doodle Escape' is a 2D action game built for the Mac / PC. You, the player, control a hero who was captured by the law and sentenced to life in prison. Your objective is to find and obtain all 4 keys within the prison to escape. Each key is located in a level each, patroled by guards and their dogs.
+Summary: 'Doodle Escape' is a 2D action game built for the Mac / PC. You, the player, control a hero who was captured by the law and sentenced to life in prison. Your objective is to find and obtain all 4 keys within the prison to escape. Each key is located in a level each, patrolled by guards and their dogs.
 
 Purpose of this project: To express my skill set combining technical excellence with a passion for making games, to improve my Game Design / programming capabilities and to create the games I would want to play myself.
 
