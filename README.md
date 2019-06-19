@@ -16,7 +16,10 @@ Summary: 'Doodle Escape' is a 2D action game built for the Mac / PC. You, the pl
 
 Purpose of this project: To express my skill set combining technical excellence with a passion for making games, to improve my Game Design / programming capabilities and to create the games I would want to play myself.
 
-Problems experienced / Future improvements: Mainly technical issues; when I built the game for the first time, none of the Json data was loading so spent some time figuring out why. There was also an input lag upon building it. Implementing abstract classes, structurs and json data took the longest. 
+Problems experienced / Future improvements: Mainly technical issues; when I built the game for the first time, none of the Json data was loading so spent some time figuring out why. There was also an input lag upon building it. Implementing abstract classes, structurs and json data took the longest.
+
+Thoughts / improvements since submission:
+- Instead of creating a structure, should've made a Level class and created a constructor. 
 
 Known serious bugs: None :) .. so far.
 
