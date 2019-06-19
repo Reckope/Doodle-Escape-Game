@@ -19,7 +19,8 @@ Purpose of this project: To express my skill set combining technical excellence 
 Problems experienced / Future improvements: Mainly technical issues; when I built the game for the first time, none of the Json data was loading so spent some time figuring out why. There was also an input lag upon building it. Implementing abstract classes, structurs and json data took the longest.
 
 Thoughts / improvements since submission:
-- Instead of creating a structure, should've made a Level class and created a constructor. 
+- Instead of creating a structure, should've made a Level class and created a constructor.
+- Use Scriptable Objects?
 
 Known serious bugs: None :) .. so far.
 
